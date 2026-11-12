@@ -35,8 +35,8 @@ export function Winner({ onOpen }: { onOpen: (id: string) => void }) {
   const nextCost = next ? costOf(next.m) : null
 
   const facts: Fact[] = [{ figure: String(winner.n), label: unitWord(winner.n) }]
-  if (cost != null) facts.push({ figure: exact(cost), label: "each" })
-  const second = next ? `${next.v.audienceName} came second with ${next.n}${nextCost != null ? `, at ${exact(nextCost)} each` : ""}.` : null
+  if (cost != null) facts.push({ figure: exact(cost), label: `per ${unitWord(1)}` })
+  const second = next ? `${next.v.audienceName} came second with ${next.n}${nextCost != null ? `, at ${exact(nextCost)} per ${unitWord(1)}` : ""}.` : null
 
   return (
     <div ref={ref} className="pw hh-field hh-field-sili hh-grain">
