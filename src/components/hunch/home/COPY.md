@@ -78,7 +78,6 @@ Winner (red field), `proof/winner.tsx`:
 - Fact 3: `28.6%` cheaper / than the next best, with at least 10 messages. A clear lead. (the percent comes from the two costs; "at least 10" is the engine's bar for a high verdict and shows only when the verdict is high and the winner cleared it; otherwise the line is "than the next best.")
 - Next: Next week, 6 of 7 posts go to them.
 - Button: See next week's posts (jumps to the next section)
-- Sample note (corner): Sample numbers. Elle is a made-up seller.
 - Post button aria-label: Open the post for {audience}
 - Gone: "How sure: High" dial and its tooltip, "Who saw it, by age", "Next best: {audience}, 10 messages", the number bubbles on the post, the price sticker on the post.
 

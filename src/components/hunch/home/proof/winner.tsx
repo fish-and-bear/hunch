@@ -7,7 +7,7 @@ import { lowerFirst } from "@/components/hunch/screens/shared"
 
 import { HomePost } from "../ugc-post"
 import { costOf } from "../data"
-import { isSample, persona, runnerUp, unitWord, winner } from "./data"
+import { runnerUp, unitWord, winner } from "./data"
 import { useReveal } from "./reveal"
 import { useMoving } from "../scroll/film"
 
@@ -72,7 +72,6 @@ export function Winner({ onOpen }: { onOpen: (id: string) => void }) {
             </p>
           ) : null}
         </div>
-        {isSample ? <p className="pw-note hh-label">{`Sample numbers. ${persona} is a made-up seller.`}</p> : null}
       </motion.div>
     </div>
   )
