@@ -6,7 +6,6 @@ import Link from "next/link"
 import { useRouter, useSearchParams } from "next/navigation"
 import { MotionConfig } from "framer-motion"
 
-import { personaOf } from "@/lib/hunch/engine/sample/catalog"
 import { useHunch, type HunchState } from "@/lib/hunch/store"
 import type { Mode } from "@/lib/hunch/types"
 
@@ -37,8 +36,8 @@ function badgeFor(step: StepKey, s: HunchState, serverMode: Mode): Badge {
   return serverMode === "sample" ? "Sample run" : null
 }
 
-function badgeTitle(badge: Exclude<Badge, null>, s: HunchState) {
-  return badge === "Sample data" ? "Sample data. No real ads were run." : `Sample run. ${personaOf(s.run)} is a made-up seller.`
+function badgeTitle(badge: Exclude<Badge, null>, _s: HunchState) {
+  return badge === "Sample data" ? "Sample data. No real ads were run." : "Sample run."
 }
 
 export function AppShell({
