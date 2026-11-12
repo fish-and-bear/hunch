@@ -6,7 +6,7 @@ const LINES = [
 ]
 
 export const HEADLINE = LINES.map((l) => l.join(" ")).join(" ")
-export const SUPPORT = "Boost 8 posts with ₱100 each on Facebook and see who messages."
+export const SUPPORT = "Hunch writes 8 posts for 8 kinds of buyers. Promote each for 3 days and see who messages."
 
 // One line on wide screens, two on phones.
 export function HeroHeadline() {

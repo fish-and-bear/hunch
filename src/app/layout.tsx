@@ -38,7 +38,7 @@ const schibsted = localFont({
 
 export const metadata: Metadata = {
   title: "Hunch",
-  description: "Find out who buys. Boost 8 posts with ₱100 each on Facebook and see who messages.",
+  description: "Find out who buys. Hunch writes 8 posts for 8 kinds of buyers. Promote each for 3 days and see who messages.",
 }
 
 export const viewport: Viewport = {

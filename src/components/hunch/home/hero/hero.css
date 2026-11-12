@@ -159,6 +159,8 @@
   display: inline-block;
 }
 .hx-support {
+  max-width: 34em;
+  text-wrap: balance;
   margin-top: calc(26 * var(--px));
   font-size: max(calc(20 * var(--px)), 15px);
 }

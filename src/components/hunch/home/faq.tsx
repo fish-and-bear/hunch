@@ -13,8 +13,8 @@ import "./faq.css"
 const total = peso(report.totalSpend)
 
 const QA: { q: string; lead: string; a: string }[] = [
-  { q: "Does Hunch post or boost for me?", lead: "No.", a: "You post and boost on your page. Hunch never logs in." },
-  { q: "Do I connect my Facebook?", lead: "No.", a: "Type the numbers or upload the Ads Manager CSV." },
+  { q: "Does Hunch post or pay for me?", lead: "No.", a: "You post and promote on your own page. Hunch never logs in." },
+  { q: "Do I connect my accounts?", lead: "No.", a: "Type in the numbers, or upload the results file from your ads." },
   { q: "Can the posts be in Tagalog?", lead: "Yes.", a: "Every post comes in Taglish, English and Tagalog." },
   { q: "Does it target by age or religion?", lead: "Never.", a: "Not by age, religion or health." },
 ]

@@ -1,6 +1,6 @@
 # Landing page copy
 
-Voice: Enter's. Headings of 7 words or fewer with one idea. Exactly one support line under a heading. Verb first. Concrete nouns: ₱100, 3 days, 8 posts, Facebook, messages, candles. No "AI", "powered", "smart", "seamless", "unlock". Nothing that explains how Hunch reasons. Sentence case everywhere. No exclamation marks. Numbers come from the data (`data.ts`), shown here with Elle's sample values.
+Voice: Enter's. Headings of 7 words or fewer with one idea. Exactly one support line under a heading. Verb first. Concrete nouns: ₱100, 3 days, 8 posts, messages, candles. No "AI", "powered", "smart", "seamless", "unlock". Nothing that explains how Hunch reasons. Sentence case everywhere. No exclamation marks. Numbers come from the data (`data.ts`), shown here with Elle's sample values.
 
 One metaphor: a hunch becomes messages. Say "hunch" for the guess, "messages" for the proof.
 
@@ -14,7 +14,7 @@ One metaphor: a hunch becomes messages. Say "hunch" for the guess, "messages" fo
 ## hero (done): hero/headline.tsx, hero/post-ring.tsx
 
 - H1: Find out who buys.
-- Support line: Boost 8 posts with ₱100 each on Facebook and see who messages.
+- Support line: Hunch writes 8 posts for 8 kinds of buyers. Promote each for 3 days and see who messages. No peso amount in the hero; the amount lives in How it works.
 - No count bubble and no captions on the posts. The mark above the headline carries no words.
 - Post button aria-label: Open the post for {audience}
 
@@ -49,13 +49,13 @@ One metaphor: a hunch becomes messages. Say "hunch" for the guess, "messages" fo
 - Step 1 line: Add a photo, a price and where you sell.
 - Step 2 title: Get 8 posts.
 - Step 2 line: Read one post for each kind of buyer.
-- Step 3 title: Boost each with ₱100.
+- Step 3 title: Put ₱100 behind each post. Line: Promote it on the app you sell on, for 3 days.
 - Step 3 line: Run them on your own Facebook page for 3 days.
 - Step 4 title: See who messaged.
 - Step 4 line: Type in the results and see which buyers sent the most messages.
 - Step 1 mock, the start screen: What do you sell? / typed line "Soy candles poured at home" / Add a photo / Price, with the price from the data ("₱350 per 180 g jar") / Where you sell, with the channels from the data ticked (Shopee, Instagram, Facebook) / button: Write my 8 posts
 - Step 2 mock: Your 8 posts / One for each kind of buyer / under each post, the audience name from the data
-- Step 3 mock: Boosted on Facebook / Day 1 of 3, then 2, then 3, with "₱800 spent" counting beside it / under each post: ₱100 and a bar in 3 parts, one per day
+- Step 3 mock: Promoted / Day 1 of 3, then 2, then 3, with "₱800 spent" counting beside it / under each post: ₱100 and a bar in 3 parts, one per day
 - Step 4 mock: Most messages / the winner's audience name / `14` messages / ₱7 a message / then all 8 audience names, most messages first, one dot per message and the count
 - Steps carry no numbers. Only the open step shows its line. On phones only the open step shows at all.
 
@@ -125,10 +125,10 @@ A chat with Hunch. At most 4 questions; each answer is one line of 12 words or f
 - Heading: Ask before you spend ₱800.
 - Support line: none. The questions do the work.
 - Chat name, next to the drop: Hunch
-- Q: Does Hunch post or boost for me?
-  A: No. You post and boost on your page. Hunch never logs in.
-- Q: Do I connect my Facebook?
-  A: No. Type the numbers or upload the Ads Manager CSV.
+- Q: Does Hunch post or pay for me?
+  A: No. You post and promote on your own page. Hunch never logs in.
+- Q: Do I connect my accounts?
+  A: No. Type in the numbers, or upload the results file from your ads.
 - Q: Can the posts be in Tagalog?
   A: Yes. Every post comes in Taglish, English and Tagalog.
 - Q: Does it target by age or religion?
@@ -162,3 +162,5 @@ A chat with Hunch. At most 4 questions; each answer is one line of 12 words or f
 ## Lines to delete wherever they still appear
 
 "The 8 picked are the most different from each other, so a test can tell them apart." / "Why it fits" / "The moment" / "Where they are" / "How to talk to them" / "Made for" / "Passed 3 checks" / "See the post" / "01 of 20" / "[ the test ]" / "[ after the test ]" / "[ why it was sent back ]" / "Hunch thinks of 20 kinds of buyers, then picks the 8 most different." / "Every post got ₱100 for 3 days, so the ranking is fair." / "It runs the same steps you just saw." / "Plain answers about posting, ads and the sample on this page." / "Sample run" chip in the header.
+
+Platform: never name Facebook, Instagram or TikTok on the landing page; say "promote", not "boost".

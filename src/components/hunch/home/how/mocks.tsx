@@ -82,7 +82,7 @@ export const PostsMock = React.memo(function PostsMock({ t, boost }: { t: number
   return (
     <div className="hw-win hw-posts" data-boost={on(!!boost)} style={{ "--hw-run": p } as React.CSSProperties}>
       <div className="hw-bar">
-        <b>{boost ? "Boosted on Facebook" : `Your ${posts.length} posts`}</b>
+        <b>{boost ? "Promoted" : `Your ${posts.length} posts`}</b>
         {boost ? (
           <span>
             Day {day} of {report.days}

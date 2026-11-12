@@ -11,7 +11,7 @@ import "./how/how.css"
 const STEPS = [
   { title: "Type what you sell.", line: "Add a photo, a price and where you sell." },
   { title: `Get ${HOW.posts} posts.`, line: "One for each kind of buyer." },
-  { title: `Boost each with ${HOW.perPost}.`, line: `Run them on your own Facebook page for ${HOW.days}.` },
+  { title: `Put ${HOW.perPost} behind each post.`, line: `Promote it on the app you sell on, for ${HOW.days}.` },
   { title: "See who messaged.", line: `Type in the results to see who sent the most ${HOW.units}.` },
 ]
 const LAST = STEPS.length - 1
