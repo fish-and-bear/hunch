@@ -43,10 +43,10 @@ One metaphor: a hunch becomes messages. Say "hunch" for the guess, "messages" fo
 
 - Heading, two lines: Know who would buy / your product in 3 days.
 - Support line: Follow 4 steps from one line to real messages.
-- Step 1: Say what you sell. / A photo and a price. That’s it.
-- Step 2: Get 8 posts. / Each one talks to a different buyer.
-- Step 3: Put ₱99 on each. / Promote them for 3 days.
-- Step 4: See who messages. / The post with the most is your buyer.
+- Step 1: Type in your product. / Name, photo, price. Done in a minute.
+- Step 2: Hunch makes 8 personalized posts. / One for each kind of buyer.
+- Step 3: Reach new people for ₱99 a post. / Each post runs for 3 days.
+- Step 4: See who reacts. / Likes, comments, shares and messages, all counted.
 - Steps: the open one in full ink, the rest faded; a thin rail beside them fills with the sun gradient step by step.
 - Step 1 mock, the start screen: What do you sell? / typed line "Soy candles poured at home" / Add a photo / Price, with the price from the data ("₱350 per 180 g jar") / Where you sell, with the channels from the data ticked (Shopee, Instagram, Facebook) / button: Write my 8 posts
 - Step 2 mock: Your 8 posts / One for each kind of buyer / under each post, the audience name from the data

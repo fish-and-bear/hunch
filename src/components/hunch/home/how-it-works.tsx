@@ -9,10 +9,10 @@ import { RiseWords, useLoop } from "./story/shared"
 import "./how/how.css"
 
 const STEPS = [
-  { title: "Say what you sell.", line: "A photo and a price. That’s it." },
-  { title: `Get ${HOW.posts} posts.`, line: "Each one talks to a different buyer." },
-  { title: `Put ${HOW.perPost} on each.`, line: `Promote them for ${HOW.days}.` },
-  { title: "See who messages.", line: "The post with the most is your buyer." },
+  { title: "Type in your product.", line: "Name, photo, price. Done in a minute." },
+  { title: `Hunch makes ${HOW.posts} personalized posts.`, line: "One for each kind of buyer." },
+  { title: `Reach new people for ${HOW.perPost} a post.`, line: `Each post runs for ${HOW.days}.` },
+  { title: "See who reacts.", line: "Likes, comments, shares and messages, all counted." },
 ]
 const LAST = STEPS.length - 1
 // The step clock stops once every mock has finished playing.
