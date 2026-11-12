@@ -19,10 +19,15 @@ const LAST = STEPS.length - 1
 // The step clock stops once every mock has finished playing.
 const CLOCK_END = 60
 const DONE = 1e9
-// Wide screens: after the last step the page zooms into the results window. Screen heights; keep in step with how.css.
+// Wide screens: after the last step the page goes through the results window. Screen heights; keep in step with how.css.
 const STEPS_TRAVEL = 2.4
 const EXIT = 0.7
-const ZOOM = 3.3
+// Share of the exit the zoom takes; the window covers the screen about halfway through the exit.
+const ZOOM_SPAN = 0.72
+// Past the cover the window grows a little more, so its corners are well clear.
+const OVERSHOOT = 1.08
+// Then the cream lifts off the results waiting underneath, whose heading starts rising right there (see how.css).
+const REVEAL: [number, number] = [0.5, 0.58]
 
 type Play = { step: number; prev: number; tick: number }
 // Where a post sits in one step: center and width in stage cqw, tilt in degrees.
@@ -56,6 +61,7 @@ export function HowItWorks() {
   const mark = React.useRef<HTMLSpanElement>(null)
   const play = React.useRef<HTMLDivElement>(null)
   const stage = React.useRef<HTMLDivElement>(null)
+  const steps = React.useRef<HTMLOListElement>(null)
   const { on: playing, reduced } = useLoop(stage, 0.4)
   const [s, set] = React.useState<Play>({ step: 0, prev: 0, tick: 0 })
   const film = useFilm()
@@ -73,37 +79,72 @@ export function HowItWorks() {
   const { scrollYProgress: near } = useScroll({ target: stage, offset: ["start end", "start 0.6"] })
   const { scrollYProgress: pinned } = useScroll({ target: section, offset: ["start start", "end end"] })
   const through = useTransform(pinned, [STEPS_TRAVEL / (STEPS_TRAVEL + EXIT), 1], [0, 1])
+  // The window's center travels to the screen's center while it grows past every edge.
   const toCenter = useMotionValue(0)
-  const wideScale = useTransform([arrive, through], ([a, z]: number[]) => (0.84 + 0.16 * easeOut(a)) * (1 + (ZOOM - 1) * ease(z)))
+  const fill = useMotionValue(2.2)
+  const cover = React.useRef(2)
+  const zoom = useTransform(through, (z) => ease(Math.min(1, z / ZOOM_SPAN)))
+  const wideScale = useTransform([arrive, zoom], ([a, k]: number[]) => (0.84 + 0.16 * easeOut(a)) * (1 + (fill.get() - 1) * k))
   const wideTurn = useTransform(arrive, [0, 1], [7, 0], { ease: easeOut })
   const wideY = useTransform(arrive, [0, 1], [120, 0], { ease: easeOut })
-  const wideX = useTransform(through, (z) => toCenter.get() * ease(z))
-  // Phones: the stage is set down as it arrives and lifted off as the section ends.
+  const wideX = useTransform(zoom, (k) => toCenter.get() * k)
+  // Phones: the stage is set down as it arrives and lifted off as the section ends; its step leaves with it.
   const { scrollYProgress: away } = useScroll({ target: section, offset: ["end 0.95", "end 0.35"] })
   const smallScale = useTransform([near, away], ([n, a]: number[]) => (0.9 + 0.1 * easeOut(n)) * (1 - 0.1 * a))
   const smallTurn = useTransform([near, away], ([n, a]: number[]) => 4 * (1 - easeOut(n)) - 5 * a)
   const smallFade = useTransform(away, [0.2, 1], [1, 0.25])
+  const stepsFade = useTransform(away, [0, 0.55], [1, 0])
+  const stepsLift = useTransform(away, [0, 0.55], [0, -24])
   const aside = useTransform(through, [0, 0.3], [0, -80])
   const asideFade = useTransform(through, [0, 0.28], [1, 0])
-  const cream = useTransform(through, [0.34, 0.66], [0, 1])
+  const paper = useTransform(through, REVEAL, [1, 0])
   const stageStyle = film
-    ? { scale: wideScale, rotate: wideTurn, y: wideY, x: wideX }
+    ? { scale: wideScale, rotate: wideTurn, y: wideY, x: wideX, "--z": through }
     : moving
       ? { scale: smallScale, rotate: smallTurn, opacity: smallFade }
       : undefined
-  const asideStyle = film ? { x: aside, opacity: asideFade } : undefined
+  const headStyle = film ? { x: aside, opacity: asideFade } : undefined
+  const stepsStyle = { ...(film ? headStyle : moving && narrow ? { y: stepsLift, opacity: stepsFade } : undefined), "--hw-done": rail }
 
+  // How far the window must grow to cover the screen, read without transforms.
   React.useEffect(() => {
     if (!film) return
     const read = () => {
       const st = stage.current
       const p = pin.current
-      if (st && p) toCenter.set(p.clientWidth / 2 - (st.offsetLeft + st.offsetWidth / 2))
+      const win = st?.querySelector<HTMLElement>(".hw-res")
+      if (!st || !p || !win) return
+      const cx = st.offsetLeft + st.offsetWidth / 2
+      const cy = st.offsetTop + win.offsetTop + win.offsetHeight / 2
+      const W = p.clientWidth
+      const H = window.innerHeight
+      // 40 px past each edge clears the rounded corners.
+      cover.current = Math.max((W / 2 + 40) / (win.offsetWidth / 2), (Math.max(cy, H - cy) + 40) / (win.offsetHeight / 2))
+      fill.set(cover.current * OVERSHOOT)
+      toCenter.set(W / 2 - cx)
     }
     read()
+    const ro = new ResizeObserver(read)
+    if (stage.current) ro.observe(stage.current)
     window.addEventListener("resize", read)
-    return () => window.removeEventListener("resize", read)
-  }, [film, toCenter])
+    return () => {
+      ro.disconnect()
+      window.removeEventListener("resize", read)
+    }
+  }, [film, toCenter, fill])
+
+  // Once the window covers the screen, the cream behind it takes over and the stage stops painting.
+  React.useEffect(() => {
+    const sec = section.current
+    if (!film || !sec) return
+    const sync = () => sec.toggleAttribute("data-through", wideScale.get() >= cover.current * 1.02)
+    sync()
+    const off = wideScale.on("change", sync)
+    return () => {
+      off()
+      sec.removeAttribute("data-through")
+    }
+  }, [film, wideScale])
 
   // Each step lays out empty slots; the posts travel between them.
   React.useEffect(() => {
@@ -186,6 +227,31 @@ export function HowItWorks() {
     }
   }, [measure, run])
 
+  // The step list keeps its tallest height, so opening a step only moves the steps under it.
+  const tall = React.useRef({ w: 0, h: 0 })
+  React.useLayoutEffect(() => {
+    const ol = steps.current
+    if (!ol || narrow) return
+    const fit = () => {
+      let h = 0
+      let line = 0
+      for (const li of Array.from(ol.children) as HTMLElement[]) {
+        const l = li.querySelector<HTMLElement>(".hw-step-l")
+        h += li.offsetHeight - (l?.offsetHeight ?? 0)
+        line = Math.max(line, (l?.firstElementChild as HTMLElement | null)?.scrollHeight ?? 0)
+      }
+      const w = ol.offsetWidth
+      if (w !== tall.current.w) tall.current = { w, h: 0 }
+      tall.current.h = Math.max(tall.current.h, Math.ceil(h + line))
+      ol.style.setProperty("--hw-tall", `${tall.current.h}px`)
+    }
+    fit()
+    const ro = new ResizeObserver(fit)
+    ro.observe(ol)
+    document.fonts?.ready.then(fit)
+    return () => ro.disconnect()
+  }, [narrow, s.step])
+
   // One clock per step, in tenths of a second.
   const ticking = playing && s.tick < CLOCK_END
   React.useEffect(() => {
@@ -209,7 +275,8 @@ export function HowItWorks() {
   })
   const actor = (i: number) => {
     const p = spots?.[s.step]?.[i]
-    const hide = !p || s.step === 0 || (s.step === LAST && i !== LEAD)
+    // On wide screens the rest land in their rows; phone rows are too small, so they bow out.
+    const hide = !p || s.step === 0 || (s.step === LAST && i !== LEAD && narrow)
     return {
       "data-hide": hide ? "" : undefined,
       "data-lead": i === LEAD ? "" : undefined,
@@ -223,7 +290,7 @@ export function HowItWorks() {
   return (
     <section ref={section} id="how-it-works" aria-labelledby="how-it-works-title" className="hw">
       <div ref={pin} className="hw-pin">
-        <motion.div className="hw-head" style={asideStyle}>
+        <motion.div className="hw-head" style={headStyle}>
           <RiseWords
             id="how-it-works-title"
             parts={[{ text: "Know who would buy", className: "block" }, { text: `your product in ${HOW.days}.`, className: "block" }]}
@@ -238,7 +305,7 @@ export function HowItWorks() {
             data-step={s.step}
             data-back={s.step < s.prev ? "" : undefined}
             aria-hidden
-            style={stageStyle}
+            style={stageStyle as React.ComponentProps<typeof motion.div>["style"]}
           >
             <motion.i className="hw-light" style={moving ? { x: light } : undefined} />
             <i key={s.step} className="hw-sheen" />
@@ -262,7 +329,7 @@ export function HowItWorks() {
               ))}
             </div>
           </motion.div>
-          <motion.ol className="hw-steps" style={{ ...asideStyle, "--hw-done": rail } as unknown as React.ComponentProps<typeof motion.ol>["style"]}>
+          <motion.ol ref={steps} className="hw-steps" style={stepsStyle as unknown as React.ComponentProps<typeof motion.ol>["style"]}>
             {STEPS.map((step, i) => (
               <li key={step.title} data-on={i === s.step ? "" : undefined}>
                 <button type="button" className="hw-step" aria-current={i === s.step ? "step" : undefined} onClick={() => go(i)}>
@@ -277,7 +344,7 @@ export function HowItWorks() {
             ))}
           </motion.ol>
         </div>
-        <motion.i aria-hidden className="hw-through" style={film ? { opacity: cream } : undefined} />
+        <motion.i aria-hidden className="hw-through" style={film ? { opacity: paper } : undefined} />
       </div>
     </section>
   )

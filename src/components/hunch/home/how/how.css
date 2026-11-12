@@ -14,6 +14,8 @@
 @media (min-width: 900px) and (prefers-reduced-motion: no-preference) {
   .hw {
     --exit: 70;
+    /* Above the results, which wait under the pin's paper until the window has become the page. */
+    z-index: 3;
   }
   .hw-pin {
     overflow: clip;
@@ -21,21 +23,30 @@
   .hw-pin .hw-stage {
     z-index: 2;
   }
-  /* The results window, grown past the screen, becomes the page. */
+  /* The pin's paper. Once the window covers the screen it takes over, then lifts off the results. */
   .hw-through {
     position: absolute;
     inset: 0;
-    z-index: 3;
+    z-index: -1;
     display: block;
     background: var(--cream);
+  }
+  /* Opacity, not visibility: the open scene sets its own visibility. */
+  .hw[data-through] .hw-stage {
     opacity: 0;
+  }
+  .hw[data-through] .ugc-clip {
+    display: none;
+  }
+  .hw[data-through],
+  .hw[data-through] * {
     pointer-events: none;
   }
-  /* The results come up while the zoom finishes. */
+  /* The results heading reaches 86% of the screen, where it starts to rise, as the window covers the screen. */
   .hw + #your-people {
     position: relative;
     z-index: 2;
-    margin-top: -52svh;
+    margin-top: -60svh;
   }
 }
 .hw-pin {
@@ -68,6 +79,7 @@
   position: relative;
   grid-area: 2 / 1;
   align-self: end;
+  min-height: var(--hw-tall, 0px);
   margin: 0;
   padding: 0 0 0 clamp(22px, 2vw, 30px);
   list-style: none;
@@ -91,19 +103,19 @@
   transform-origin: 50% 0;
 }
 .hw-steps > li {
-  transition:
-    opacity 0.6s var(--ease-out),
-    translate 0.8s var(--hw-spring);
-}
-.hw-steps > li:not([data-on]) {
-  opacity: 0.3;
+  transition: translate 0.8s var(--hw-spring);
 }
 .hw-steps > li[data-on] {
   translate: 8px 0;
 }
+/* Closed steps stay in full ink at the lighter weight; hovering draws the thin gold line. */
+.hw-step-t > span {
+  background: linear-gradient(var(--gold), var(--gold)) no-repeat 0 92% / 0% 0.09em;
+  transition: background-size 0.5s var(--ease-out);
+}
 @media (hover: hover) {
-  .hw-steps > li:not([data-on]):hover {
-    opacity: 0.6;
+  .hw-steps > li:not([data-on]) .hw-step:hover .hw-step-t > span {
+    background-size: 100% 0.09em;
   }
 }
 .hw-step {
@@ -126,7 +138,6 @@
   letter-spacing: -0.03em;
   line-height: 1.08;
   text-wrap: balance;
-  transition: font-weight 0.5s var(--ease-out);
 }
 li[data-on] > .hw-step .hw-step-t {
   font-weight: 800;
@@ -292,6 +303,39 @@ li[data-on] > .hw-step .hw-step-l > span {
   transition:
     transform 1.2s var(--hw-spring) calc(var(--k) * 55ms),
     opacity 0.3s linear calc(var(--k) * 40ms + 0.28s);
+}
+/* A post nobody can see plays no clip. */
+.hw-actor[data-hide] .ugc-clip {
+  display: none;
+}
+/* The post's own chrome eases in and out; promoted posts gain their tag and button softly. */
+.hw-actor .ugc > :not(.ugc-photo),
+.hw-actor .ugc::before,
+.hw-actor .ugc::after {
+  transition: opacity 0.4s linear;
+}
+.hw-actor .ugc-cta,
+.hw-actor .ugc-meta > i {
+  animation: hw-chrome 0.5s var(--ease-out) 0.2s both;
+}
+@keyframes hw-chrome {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 1.5cqw, 0);
+  }
+}
+/* On the ranking the rest are small stills: the photo only, its corners a little rounder once landed. */
+.hw-stage[data-step="3"] .hw-actor:not([data-lead]) .ugc > :not(.ugc-photo),
+.hw-stage[data-step="3"] .hw-actor:not([data-lead]) .ugc::before,
+.hw-stage[data-step="3"] .hw-actor:not([data-lead]) .ugc::after {
+  opacity: 0;
+}
+.hw-stage[data-step="3"] .hw-actor:not([data-lead]) .ugc-clip {
+  display: none;
+}
+.hw-stage[data-step="3"] .hw-actor:not([data-lead]) .ugc {
+  border-radius: 16% / 9%;
+  transition: border-radius 0s linear 0.9s;
 }
 
 /* Sheets come in from below and leave upward; scrolling back reverses it. */
@@ -599,6 +643,26 @@ li[data-on] > .hw-step .hw-step-l > span {
   column-gap: 3.8cqw;
   width: 91cqw;
   padding: 3.6cqw;
+  isolation: isolate;
+}
+/* Going through the window: its content melts first, then its paper turns into the page's cream. */
+.hw-stage {
+  --z: 0;
+}
+.hw-res-say,
+.hw-rank,
+.hw-cast {
+  opacity: clamp(0, (0.5 - var(--z)) * 6, 1);
+}
+.hw-res::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--cream);
+  opacity: clamp(0, (var(--z) - 0.36) * 7, 1);
+  pointer-events: none;
 }
 .hw-res-post {
   grid-area: 1 / 1 / 3 / 2;
@@ -662,24 +726,28 @@ li[data-on] > .hw-step .hw-step-l > span {
   padding: 0;
   list-style: none;
 }
+/* A leaderboard: each row starts with its post, landed small, then its name, one dot per message, the count. */
 .hw-rank li {
   position: relative;
   display: grid;
-  grid-template-columns: 26cqw minmax(0, 1fr) 3.2cqw;
+  grid-template-columns: 1.9cqw 23.4cqw minmax(0, 1fr) 3.2cqw;
   align-items: center;
-  column-gap: 1.3cqw;
-  height: 3.75cqw;
+  column-gap: 1.2cqw;
+  height: 4.1cqw;
   font-size: max(10.5px, 1.48cqw);
   font-weight: 500;
   letter-spacing: -0.01em;
   line-height: 1.1;
 }
-.hw-row-slot {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 2cqw;
-  height: 100%;
+.hw-row-slot,
+.hw-row-thumb {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+}
+.hw-row-thumb {
+  display: block;
+  object-fit: cover;
+  border-radius: 0.3cqw;
 }
 .hw-rank li > :not(.hw-row-slot) {
   opacity: 0;
@@ -693,18 +761,16 @@ li[data-on] > .hw-step .hw-step-l > span {
   font-weight: 800;
 }
 .hw-rank-name {
-  overflow: hidden;
   white-space: nowrap;
-  text-overflow: ellipsis;
 }
 .hw-rank-dots {
   display: flex;
-  gap: 0.42cqw;
+  gap: 0.38cqw;
 }
 .hw-rank-dots i {
   flex: none;
-  width: 1.04cqw;
-  height: 1.04cqw;
+  width: 1cqw;
+  height: 1cqw;
   border-radius: 50%;
   background: var(--ink);
 }
@@ -791,6 +857,7 @@ li[data-on] > .hw-step .hw-step-l > span {
   /* Only the open step shows, in place. */
   .hw-steps {
     display: grid;
+    min-height: 0;
   }
   .hw-steps > li {
     grid-area: 1 / 1;
@@ -955,17 +1022,38 @@ li[data-on] > .hw-step .hw-step-l > span {
     margin-top: 3.6cqw;
   }
   .hw-rank li {
-    grid-template-columns: minmax(0, 1fr) 27.4cqw 5.4cqw;
+    grid-template-columns: minmax(0, 1fr) 22.6cqw 5.4cqw;
     column-gap: 2cqw;
     height: 5.3cqw;
     font-size: 11px;
   }
+  /* Phone rows are too small for stills: the rest bow out where they stand, then move. */
+  .hw-row-slot {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4cqw;
+    height: 100%;
+    aspect-ratio: auto;
+  }
+  .hw-row-thumb {
+    display: none;
+  }
+  .hw-stage[data-step="3"] .hw-cast[data-ready] .hw-actor[data-hide] {
+    transition:
+      transform 1.2s var(--hw-spring) 0.24s,
+      opacity 0.2s linear calc(var(--k) * 25ms);
+  }
   .hw-rank-dots {
-    gap: 0.5cqw;
+    gap: 0.4cqw;
   }
   .hw-rank-dots i {
-    width: 1.5cqw;
-    height: 1.5cqw;
+    width: 1.2cqw;
+    height: 1.2cqw;
+  }
+  /* Only the lead post plays its clip on a phone. */
+  .hw-actor:not([data-lead]) .ugc-clip {
+    display: none;
   }
 }
 
@@ -996,12 +1084,15 @@ li[data-on] > .hw-step .hw-step-l > span {
     transition: none;
   }
   .hw-cast[data-ready] .hw-actor,
-  .hw-cast[data-ready] .hw-actor[data-hide] {
+  .hw-cast[data-ready] .hw-actor[data-hide],
+  .hw-stage[data-step="3"] .hw-cast[data-ready] .hw-actor[data-hide] {
     transition: opacity 0.3s linear;
   }
   .hw-shot[data-on] .hw-rank-dots i,
   .hw-bar span b,
-  .hw-caret[data-blink] {
+  .hw-caret[data-blink],
+  .hw-actor .ugc-cta,
+  .hw-actor .ugc-meta > i {
     animation: none;
   }
   .hw-step-t,

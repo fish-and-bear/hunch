@@ -18,7 +18,7 @@ function useMedia(query: string) {
   )
 }
 
-/** True where the pinned, wide-screen scenes play. Matches the `film` media query in scroll.css. */
+/** True where the pinned, wide-screen scenes play. Same query as the pinned scenes' CSS. */
 export const useFilm = () => useMedia(WIDE)
 /** True wherever scroll-linked motion is welcome. */
 export const useMoving = () => useMedia(MOVING)

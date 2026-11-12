@@ -194,7 +194,13 @@ export const ResultsMock = React.memo(function ResultsMock({ t }: { t: number })
           const n = count(v.code)
           return (
             <li key={v.id} data-lead={on(k === 0)} style={{ "--k": k } as React.CSSProperties}>
-              {k === 0 ? null : <i className="hw-row-slot" data-slot={posts.indexOf(v)} />}
+              {k === 0 ? (
+                // The winner itself stands large on the left; its row keeps a still of it.
+                // eslint-disable-next-line @next/next/no-img-element
+                <img className="hw-row-thumb" src={photoUrlOf(v)} alt="" draggable={false} />
+              ) : (
+                <i className="hw-row-slot" data-slot={posts.indexOf(v)} />
+              )}
               <span className="hw-rank-name">{nameOf(v.audienceId)}</span>
               <span className="hw-rank-dots">
                 {Array.from({ length: n }, (_, j) => (
