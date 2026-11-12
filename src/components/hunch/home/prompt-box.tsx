@@ -22,7 +22,7 @@ const EXAMPLES = [
   "Soy candles, ₱350 a jar",
   "Matcha in 30 g tins, ₱480",
   "Calamansi soap, ₱120 a bar",
-  "Crochet plant hangers",
+  "Chili garlic oil, ₱180 a jar",
   "Thrifted denim jackets",
 ]
 

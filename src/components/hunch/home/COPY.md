@@ -21,7 +21,7 @@ One metaphor: a hunch becomes messages. Say "hunch" for the guess, "messages" fo
 ## prompt-box.tsx (done)
 
 - Field label (screen readers): What do you sell?
-- Typewriter examples, each short enough for one line in the box at 390 px: Soy candles, ₱350 a jar / Matcha in 30 g tins, ₱480 / Calamansi soap, ₱120 a bar / Crochet plant hangers / Thrifted denim jackets
+- Typewriter examples, each short enough for one line in the box at 390 px: Soy candles, ₱350 a jar / Matcha in 30 g tins, ₱480 / Calamansi soap, ₱120 a bar / Chili garlic oil, ₱180 a jar / Thrifted denim jackets
 - Send button aria-label: Write my 8 posts
 - Empty submit tooltip: Type what you sell first.
 - Under the box: only the Open Elle's test link, in every mode.
@@ -78,7 +78,7 @@ Winner (red field), `proof/winner.tsx`:
 ## prompt-box.tsx (done)
 
 - Field label (screen readers): What do you sell?
-- Typewriter examples, each short enough for one line in the box at 390 px: Soy candles, ₱350 a jar / Matcha in 30 g tins, ₱480 / Calamansi soap, ₱120 a bar / Crochet plant hangers / Thrifted denim jackets
+- Typewriter examples, each short enough for one line in the box at 390 px: Soy candles, ₱350 a jar / Matcha in 30 g tins, ₱480 / Calamansi soap, ₱120 a bar / Chili garlic oil, ₱180 a jar / Thrifted denim jackets
 - Send button aria-label: Write my 8 posts
 - Empty submit tooltip: Type what you sell first.
 - Under the box: only the Open Elle's test link, in every mode.
