@@ -147,7 +147,7 @@
 
 /* Footer. */
 .ft {
-  padding: calc(96 * var(--u)) var(--gutter) 28px;
+  padding: calc(88 * var(--u)) var(--gutter) 28px;
   background: var(--cream-deep);
 }
 .ft-top {
@@ -160,7 +160,7 @@
   font-size: calc(56 * var(--u));
 }
 .ft-nav {
-  width: calc(640 * var(--u));
+  width: 100%;
 }
 .ft-nav-title {
   font-size: 15px;
@@ -177,7 +177,7 @@
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  font-size: calc(34 * var(--u));
+  font-size: calc(30 * var(--u));
   font-weight: 800;
   line-height: 1.1;
   letter-spacing: -0.035em;
@@ -208,8 +208,17 @@
   opacity: 1;
   transition-duration: 0.1s;
 }
-.ft-link {
+.ft-link,
+.ft-up {
   transition: opacity 0.15s linear;
+}
+.ft-up {
+  margin-left: auto;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.ft-small p:first-child {
+  margin-right: auto;
 }
 .ft-link:active {
   opacity: 0.6;
@@ -219,7 +228,9 @@
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 6px 32px;
-  margin-top: calc(40 * var(--u));
+  margin-top: calc(64 * var(--u));
+  padding-top: 18px;
+  border-top: 1.5px solid rgb(26 17 11 / 0.14);
   font-size: 14px;
   font-weight: 600;
   line-height: 1.3;

@@ -145,19 +145,19 @@ A chat with Hunch. At most 4 questions; each answer is one line of 12 words or f
 
 ## footer.tsx
 
-- Line under the wordmark: Find out who buys.
-- Links heading: Open a step with Elle's sample
+- No wordmark and no tagline: the header already shows both.
+- Links heading: See each step with Elle's sample
 - Links: Start / Studio / Your 8 hunches / Your 8 posts / Run the test / Results / Next week
 - Small print: Made in Manila for sellers just starting out.
 - Small print, sample mode: Sample data. No real ads were run.
-- Wordmark link aria-label: Hunch, back to the top
+- Small print, right: Back to top
 
 ## hidden-ending.tsx
 
-- Heading: Every dot could be a buyer.
-- Hint (mouse): Move around to find yours.
-- Hint (touch): Tap to find yours.
-- Button: Back to top
+- Heading: Go find your buyers.
+- Hint (mouse): Move around and they light up.
+- Hint (touch): Tap and they light up.
+- Button: Try your product (goes to /start)
 
 ## Lines to delete wherever they still appear
 

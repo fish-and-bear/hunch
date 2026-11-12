@@ -3,6 +3,8 @@
 import * as React from "react"
 
 import { useReduced } from "@/components/ds/instruments"
+import Link from "next/link"
+
 import { LetterRoll } from "./letter-roll"
 import "./proof/base.css"
 import "./proof/closing.css"
@@ -69,18 +71,14 @@ export function HiddenEnding() {
     <section id="hidden-ending" aria-label="The end of the page" className="he hh-field hh-field-gumamela hh-grain">
       <PeopleField reduced={reduced} />
       <div className="he-words">
-        <h2 className="hh-display he-title">Every dot could be a buyer.</h2>
+        <h2 className="hh-display he-title">Go find your buyers.</h2>
         <p className="hh-line he-hint">
-          <span className="he-hint-mouse">Move around to find yours.</span>
-          <span className="he-hint-touch">Tap to find yours.</span>
+          <span className="he-hint-mouse">Move around and they light up.</span>
+          <span className="he-hint-touch">Tap and they light up.</span>
         </p>
-        <button
-          type="button"
-          onClick={() => window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" })}
-          className="hh-pill hh-pill-light he-top group"
-        >
-          <LetterRoll text="Back to top" />
-        </button>
+        <Link href="/start" className="hh-pill hh-pill-light he-top group">
+          <LetterRoll text="Try your product" />
+        </Link>
       </div>
     </section>
   )
