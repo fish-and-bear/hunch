@@ -18,38 +18,21 @@
 .ugc::before{content:""; position:absolute; z-index:4; left:0; bottom:0; height:.55cqw;
   width:var(--played,38%); background:rgba(255,255,255,.9)}
 
-/* on-video text: --y is % of the post height */
-.ugc-text{
-  --o:.062em;
-  --ring:var(--o) 0 0 #000,calc(var(--o)*-1) 0 0 #000,0 var(--o) 0 #000,0 calc(var(--o)*-1) 0 #000,
-    calc(var(--o)*.71) calc(var(--o)*.71) 0 #000,calc(var(--o)*-.71) calc(var(--o)*.71) 0 #000,
-    calc(var(--o)*.71) calc(var(--o)*-.71) 0 #000,calc(var(--o)*-.71) calc(var(--o)*-.71) 0 #000,
-    calc(var(--o)*.92) calc(var(--o)*.38) 0 #000,calc(var(--o)*-.92) calc(var(--o)*.38) 0 #000,
-    calc(var(--o)*.92) calc(var(--o)*-.38) 0 #000,calc(var(--o)*-.92) calc(var(--o)*-.38) 0 #000,
-    calc(var(--o)*.38) calc(var(--o)*.92) 0 #000,calc(var(--o)*-.38) calc(var(--o)*.92) 0 #000,
-    calc(var(--o)*.38) calc(var(--o)*-.92) 0 #000,calc(var(--o)*-.38) calc(var(--o)*-.92) 0 #000;
-  position:absolute; z-index:2; left:6cqw; right:6cqw;
-  top:calc(var(--y,16)*1%);
-  font-size:calc(6cqw*var(--size,1)); font-weight:700; line-height:1.26; letter-spacing:.012em; text-align:center;
-  transform:rotate(var(--tilt,0deg));
-}
+/* on-video text, matching TikTok's own text tool */
+.ugc-text{position:absolute; z-index:2; left:7cqw; right:7cqw;
+  font-size:5.4cqw; font-weight:600; line-height:1.24; letter-spacing:0; text-align:center}
 .ugc-text span{display:block}
-.ugc-text.classic{text-shadow:var(--ring),0 .08em .16em rgba(0,0,0,.4)}
-.ugc-text.shadow{font-weight:600; text-shadow:0 .04em .06em #000,0 0 .25em rgba(0,0,0,.7),0 0 .7em rgba(0,0,0,.45)}
-.ugc-text.box{line-height:1.2; font-weight:600}
-.ugc-text.box span{display:table; margin:-.13em auto 0; padding:.2em .52em .25em; border-radius:.4em;
-  background:#fff; color:#141414}
-.ugc-text.box .hot{background:var(--accent); color:var(--accent-ink)}
-.ugc-text.cap{--o:.07em; left:14cqw; right:14cqw; font-size:calc(7.6cqw*var(--size,1)); font-weight:900;
-  line-height:1.1; letter-spacing:.022em; text-shadow:var(--ring),0 .11em 0 #000,0 .16em .22em rgba(0,0,0,.5)}
-.ugc-text.cap b{font-weight:inherit; color:var(--yellow)}
+.ugc-text.classic{text-shadow:0 .03em .1em rgba(0,0,0,.55),0 0 .4em rgba(0,0,0,.25)}
+/* lines join into one block, like the app's highlight boxes */
+.ugc-text.box span,.ugc-text.dark span{display:table; margin:0 auto; padding:.13em .42em .15em; border-radius:.28em;
+  background:#fff; color:#111; line-height:1.18}
+.ugc-text.box span + span,.ugc-text.dark span + span{margin-top:-.14em}
+.ugc-text.dark span{background:#111; color:#fff}
 
-.ugc-price{position:absolute; z-index:2; left:calc(var(--x,8)*1cqw);
-  top:calc(var(--y,40)*1%);
-  padding:.3em .5em .34em; border-radius:.32em; background:var(--yellow); color:#141414;
-  font-size:calc(5.2cqw*var(--size,1)); font-weight:800; line-height:1; white-space:nowrap;
-  transform:rotate(var(--tilt,-6deg)); box-shadow:0 .1em .3em rgba(0,0,0,.35)}
-.ugc-price.red{background:#e3261f; color:#fff; border:.13em solid #fff}
+.ugc-price{position:absolute; z-index:2; left:50%; top:66%; transform:translateX(-50%);
+  padding:.13em .42em .15em; border-radius:.28em; background:#fff; color:#111;
+  font-size:4.6cqw; font-weight:600; line-height:1.18; white-space:nowrap}
+.ugc-price.dark{background:#111; color:#fff}
 
 /* right rail */
 .ugc-rail{position:absolute; z-index:3; right:2.4cqw; bottom:4.2cqw; width:12.4cqw; list-style:none;
@@ -97,7 +80,6 @@
 .ugc-meta small{display:flex}
 .ugc-copy{position:absolute; z-index:2; left:0; right:0; top:var(--copy-y,8%); display:flex; flex-direction:column; gap:5.4cqw}
 .ugc-copy .ugc-text{position:static; margin:0 6cqw; text-wrap:balance}
-.ugc-copy .ugc-text.cap{margin:0 12cqw}
 .ugc-copy .ugc-text.box{text-wrap:wrap}
 .ugc-fill{position:absolute; inset:0; z-index:0; background:var(--sun, #ff6a1f)}
 

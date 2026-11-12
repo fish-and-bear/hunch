@@ -1,6 +1,6 @@
 "use client"
 
-import type { CSSProperties } from "react"
+import { useEffect, useRef, type CSSProperties } from "react"
 
 import type { Version } from "@/lib/hunch/types"
 import { cn } from "@/lib/utils"
@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils"
 import { metricsByVersion, photoUrlOf, run } from "./data"
 import "./ugc.css"
 
-type TextStyle = "classic" | "shadow" | "box"
+type TextStyle = "classic" | "box" | "dark"
 
 export type UgcStats = { likes: number; comments: number; saves: number; shares: number }
 
@@ -31,7 +31,9 @@ export type UgcPostProps = {
   style?: CSSProperties
 }
 
-const STYLES: TextStyle[] = ["box", "classic", "classic", "shadow", "box", "classic", "shadow", "box"]
+const STYLES: TextStyle[] = ["box", "dark", "box", "box", "classic", "box", "classic", "box"]
+// Where the text sits, as % of post height; creators move it around.
+const SPOTS = [14, 24, 18, 30, 16, 22, 34, 20]
 
 const sentences = (s: string) => s.split(/(?<=[.!?])\s+/).map((x) => x.trim()).filter(Boolean)
 const bare = (s: string) => s.replace(/[.!?]+$/, "")
@@ -59,25 +61,48 @@ function boxLines(text: string, max = 22) {
   return out
 }
 
-// The punch line: its last word turns yellow (two words when the last one is tiny).
-function punch(text: string) {
-  const words = bare(text).split(/\s+/)
-  const take = words.length > 2 && (words[words.length - 1]?.length ?? 0) <= 3 ? 2 : 1
-  return { head: lower(words.slice(0, -take).join(" ")), hot: words.slice(-take).join(" ") }
-}
-
+// One block in TikTok's own text tool: one style per post, no colored words.
 function onVideo(hook: string, index: number) {
-  const parts = sentences(hook)
   const style = STYLES[index % STYLES.length] ?? "classic"
-  if (parts.length < 2 || style === "box") {
-    return { style: "box" as const, lines: boxLines(lower(bare(parts.join(" ")))), punch: null }
-  }
-  return { style, lines: [bare(parts.slice(0, -1).join(" "))], punch: punch(parts[parts.length - 1] ?? "") }
+  const text = lower(bare(sentences(hook).join(" ")))
+  return { style, lines: style === "classic" ? [text] : boxLines(text) }
 }
 
 // Photos fade in once decoded, so none pops in.
 const shown = (img: HTMLImageElement | null) => {
   if (img?.complete && img.naturalWidth > 0) img.dataset.in = ""
+}
+
+// Sample candle posts have a silent clip next to the photo; it plays only while on screen.
+const clipOf = (photo?: string) => (photo && /\/sample\/candles\/A\d\.jpg$/.test(photo) ? photo.replace(/\.jpg$/, ".mp4") : null)
+
+function Clip({ src, poster }: { src: string; poster: string }) {
+  const ref = useRef<HTMLVideoElement>(null)
+  useEffect(() => {
+    const v = ref.current
+    if (!v || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+    const io = new IntersectionObserver(([e]) => {
+      if (e?.isIntersecting) {
+        if (!v.src) v.src = src
+        v.play().catch(() => {})
+      } else v.pause()
+    }, { threshold: 0.2 })
+    io.observe(v)
+    return () => io.disconnect()
+  }, [src])
+  return (
+    <video
+      ref={ref}
+      className="ugc-photo ugc-clip"
+      poster={poster}
+      muted
+      loop
+      playsInline
+      preload="none"
+      aria-hidden
+      onPlaying={(e) => (e.currentTarget.dataset.in = "")}
+    />
+  )
 }
 
 /** One post as it looks on a phone: the seller's photo, the hook as on-video text, the app's own chrome. */
@@ -89,33 +114,25 @@ export function UgcPost({ version, photo, avatar, handle, price, boosted, stats,
   return (
     <span
       className={cn("ugc", feed && "ugc--feed", className)}
-      style={{ "--played": `${played}%`, ...style } as CSSProperties}
+      style={{ "--played": `${played}%`, "--copy-y": `${SPOTS[index % SPOTS.length]}%`, ...style } as CSSProperties}
     >
       <span className="ugc-fill" />
       {photo ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img className="ugc-photo" src={photo} alt="" draggable={false} ref={shown} onLoad={(e) => shown(e.currentTarget)} />
       ) : null}
+      {clipOf(photo) && !photoOnly ? <Clip src={clipOf(photo)!} poster={photo!} /> : null}
       {photoOnly ? null : (
         <>
           <span className="ugc-copy">
             <span className={cn("ugc-text", text.style)}>
               {text.lines.map((l, i) => (
-                <span key={i} className={text.style === "box" && i === text.lines.length - 1 && i > 0 ? "hot" : undefined}>
-                  {l}
-                </span>
+                <span key={i}>{l}</span>
               ))}
             </span>
-            {text.punch ? (
-              <span className="ugc-text cap">
-                <span>
-                  {text.punch.head} <b>{text.punch.hot}</b>
-                </span>
-              </span>
-            ) : null}
           </span>
           {price ? (
-            <b className={cn("ugc-price", index % 2 ? "red" : null)} style={{ "--x": 8, "--y": 50 } as CSSProperties}>
+            <b className={cn("ugc-price", text.style === "dark" && "dark")}>
               {price}
             </b>
           ) : null}
