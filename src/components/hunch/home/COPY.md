@@ -29,7 +29,7 @@ One metaphor: a hunch becomes messages. Say "hunch" for the guess, "messages" fo
 
 ## audiences.tsx (the 8 kinds of buyers)
 
-- Heading, one line: Who buys candles? Maybe… (the list below finishes the sentence; no support line)
+- Heading, one line: Who buys scented candles? Maybe… (the list below finishes the sentence; no support line)
 - Each buyer: the audience name as the title, its post as a phone frame beside it, and the `situation` sentence from the data as the only text. No field labels.
 - Control to see the rest: Show all 20 / Show the 8
 - A buyer that was not picked: its name, struck through softly, and its cut reason from the data.
@@ -86,7 +86,7 @@ Winner (red field), `proof/winner.tsx`:
 
 ## audiences.tsx (the 8 kinds of buyers)
 
-- Heading, one line: Who buys candles? Maybe… (the list below finishes the sentence; no support line)
+- Heading, one line: Who buys scented candles? Maybe… (the list below finishes the sentence; no support line)
 - Each buyer: the audience name as the title, its post as a phone frame beside it, and the `situation` sentence from the data as the only text. No field labels.
 - Control to see the rest: Show all 20 / Show the 8
 - A buyer that was not picked: its name, struck through softly, and its cut reason from the data.

@@ -100,7 +100,7 @@ export function Audiences() {
   return (
     <section id="audiences" aria-labelledby="audiences-title" className="sy-buyers">
       <div className="sy-buyers-head">
-        <RiseWords id="audiences-title" parts={[{ text: "Who buys candles? Maybe…" }]} className="hh-title sy-h" />
+        <RiseWords id="audiences-title" parts={[{ text: "Who buys scented candles? Maybe…" }]} className="hh-title sy-h" />
       </div>
 
       <div className="sy-buyers-body">
