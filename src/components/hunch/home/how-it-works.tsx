@@ -141,7 +141,7 @@ export function HowItWorks() {
         <motion.div className="hw-head" style={asideStyle}>
           <RiseWords id="how-it-works-title" parts={[{ text: `Run it in ${HOW.days}.` }]} className="hh-title sy-h" />
           <p className="hh-line sy-support">
-            It takes {STEPS.length} steps and ₱800.
+            It takes {STEPS.length} steps and {HOW.perPost} a post.
           </p>
         </motion.div>
         <span ref={mark} className="hw-mark" />

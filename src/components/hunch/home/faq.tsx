@@ -3,14 +3,12 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore, type CSSProperties } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 
-import { peso, report } from "./data"
 import { LetterRoll } from "./letter-roll"
 import { useReveal } from "./proof/reveal"
 import { easeOut, useMoving } from "./scroll/film"
 import "./proof/base.css"
 import "./faq.css"
 
-const total = peso(report.totalSpend)
 
 const QA: { q: string; lead: string; a: string }[] = [
   { q: "Does Hunch post or pay for me?", lead: "No.", a: "You post and promote on your own page. Hunch never logs in." },
@@ -154,7 +152,7 @@ export function Faq() {
     <section ref={ref} id="faq" aria-labelledby="faq-title" className="fc" data-live={live ? "" : undefined}>
       <motion.i aria-hidden className="fc-slant" style={moving ? { skewY: slant } : undefined} />
       <h2 id="faq-title" className="hh-title fc-title pf-rise" data-rise>
-        {`Ask before you spend ${total}.`}
+        Ask before you spend anything.
       </h2>
       <motion.div ref={pop} className="fc-pop" style={moving ? { scale: popScale, rotate: popTurn, y: popY } : undefined}>
       <div ref={app} className="fc-app pf-rise" data-rise style={{ "--rd": "0.1s" } as CSSProperties}>

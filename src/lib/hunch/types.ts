@@ -184,11 +184,11 @@ export type TestEvent =
   | { type: "done"; run: TestRun }
   | { type: "error"; message: string };
 
-// Test setup on the Run the test screen: total budget split equally across the 8 posts, 3 days.
-export type BudgetPreset = 400 | 800 | 1600;
+// Test setup on the Run the test screen: the same amount on each of the 8 posts, 3 days.
+export type BudgetPreset = 49 | 99 | 199; // per post
 export interface TestSetup {
-  budget: BudgetPreset;
-  perPost: number; // budget / 8
+  budget: number; // perPost * 8
+  perPost: BudgetPreset;
   days: 3;
 }
 

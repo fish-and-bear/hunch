@@ -13,7 +13,7 @@ import type { BudgetPreset, TestRun } from "@/lib/hunch/types"
 import { usePostFrame } from "./run-post"
 import "./test.css"
 
-const PRESETS: BudgetPreset[] = [400, 800, 1600]
+const PRESETS: BudgetPreset[] = [49, 99, 199]
 
 const peso = (n: number) => `₱${Math.round(n).toLocaleString("en-PH")}`
 const codeNum = (code: string) => Number(code.replace(/\D/g, "")) || 0
@@ -180,7 +180,7 @@ function Steps({ steps, done, toggle }: { steps: Step[]; done: string[]; toggle:
 
 function RunTestView({ run }: { run: TestRun }) {
   const s = useHunch()
-  const { budget, perPost, days } = s.setup
+  const { perPost, days } = s.setup
   const count = run.versions.length
   const firstCode = useMemo(() => [...run.versions].map((v) => v.code).sort((a, b) => codeNum(a) - codeNum(b))[0] ?? "A1", [run.versions])
   const steps = useMemo(() => stepsFor(count, days), [count, days])
@@ -194,9 +194,9 @@ function RunTestView({ run }: { run: TestRun }) {
 
         <div className="ht-budget ha-rise" style={{ "--i": 7 } as React.CSSProperties}>
           <p id="test-budget" className="ha-label">
-            Total budget
+            Per post
           </p>
-          <BudgetPicker value={budget} onChange={(b) => hunchStore.setBudget(b)} labelId="test-budget" />
+          <BudgetPicker value={perPost} onChange={(b) => hunchStore.setBudget(b)} labelId="test-budget" />
         </div>
 
         <div className="ht-stage">

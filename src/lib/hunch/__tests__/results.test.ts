@@ -148,19 +148,19 @@ describe("pickWinner", () => {
 });
 
 describe("Elle's sample export", () => {
-  it("gives A3 high at ₱7.14 against A6 at ₱10.00", () => {
+  it("gives A3 high at ₱7.07 against A6 at ₱9.90", () => {
     const run = sampleRunFor();
     const r = computeReport({ run, csvText: ELLE_RESULTS_CSV, mode: "sample" });
     expect(r.verdict.metric).toBe("cost_per_result");
     expect(r.verdict.winnerCode).toBe("A3");
     expect(r.verdict.runnerUpCode).toBe("A6");
     expect(r.verdict.confidence).toBe("high");
-    expect(r.verdict.ranking.slice(0, 2)).toEqual([{ code: "A3", value: 7.14 }, { code: "A6", value: 10 }]);
+    expect(r.verdict.ranking.slice(0, 2)).toEqual([{ code: "A3", value: 7.07 }, { code: "A6", value: 9.9 }]);
     expect(r.verdict.ranking.map((x) => x.code)).toEqual(["A3", "A6", "A5", "A4", "A2", "A7", "A1", "A8"]);
     expect(r.verdict.caveats).toEqual([]);
     expect(r.days).toBe(3);
-    expect(r.totalSpend).toBe(800);
-    expect(r.metrics[0]).toMatchObject({ code: "A3", rank: 1, results: 14, linkClicks: 31, costPerResult: 7.14, adName: "A3 Sala before guests" });
+    expect(r.totalSpend).toBe(792);
+    expect(r.metrics[0]).toMatchObject({ code: "A3", rank: 1, results: 14, linkClicks: 31, costPerResult: 7.07, adName: "A3 Sala before guests" });
     expect(r.icp.reachedMostly).toBe(NO_BREAKDOWN);
     expect(NO_BREAKDOWN).toBe("No breakdown in this export");
   });
@@ -189,7 +189,7 @@ describe("Elle's sample export", () => {
     expect(r.icp.confidence).toBe("strong");
     expect(r.icp.reachedMostly).not.toBe(NO_BREAKDOWN);
     expect(r.notes?.[0]).toBe("Sample data. No real ads were run.");
-    expect(r.metrics.find((m) => m.code === "A3")?.engagementsPer100).toBe(134);
+    expect(r.metrics.find((m) => m.code === "A3")?.engagementsPer100).toBe(135.4);
   });
 
   it("a typed grid is a first-class input", () => {
@@ -249,7 +249,7 @@ describe("Kaye's matcha sample", () => {
     expect(r.verdict.winnerCode).toBe("A6");
     expect(r.verdict.runnerUpCode).toBe("A4");
     expect(r.verdict.confidence).toBe("high");
-    expect(r.verdict.ranking.slice(0, 2)).toEqual([{ code: "A6", value: 6.67 }, { code: "A4", value: 9.09 }]);
+    expect(r.verdict.ranking.slice(0, 2)).toEqual([{ code: "A6", value: 6.6 }, { code: "A4", value: 9 }]);
     expect(r.verdict.explanation).toMatch(/^Last-minute monthsary gifts won: A6/);
     expect(r.hasBreakdown).toBe(true);
     expect(r.icp.reachedMostly).not.toBe(NO_BREAKDOWN);

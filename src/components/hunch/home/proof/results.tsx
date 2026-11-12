@@ -4,7 +4,8 @@ import { useEffect, useRef, useState, type CSSProperties } from "react"
 
 import { lowerFirst } from "@/components/hunch/screens/shared"
 
-import { peso, report, run } from "../data"
+import { run } from "../data"
+import { perPost, pesos } from "../story/shared"
 import { HomePost } from "../ugc-post"
 import { mostMessages, persona, ranked, unitWord, winner } from "./data"
 import { useReveal } from "./reveal"
@@ -64,7 +65,7 @@ export function Results({ onOpen }: { onOpen: (id: string) => void }) {
     <div ref={ref} className="pr">
       <header className="pr-head" data-rise>
         <h2 id="your-people-title" className="hh-title pr-title">
-          {`${peso(report.totalSpend)} found ${persona}’s buyers.`}
+          {`${pesos(perPost)} a post found ${persona}’s buyers.`}
         </h2>
         <p className="hh-line pr-line">{`See which of the ${run.versions.length} posts got people to message.`}</p>
       </header>

@@ -1655,14 +1655,14 @@
     "runId": "run_elle_sample",
     "mode": "sample",
     "days": 3,
-    "totalSpend": 800,
+    "totalSpend": 792,
     "metrics": [
       {
         "versionId": "v_elle_a3",
         "code": "A3",
         "audienceName": "Hosts getting the sala ready",
         "matchedBy": "code",
-        "spend": 100,
+        "spend": 99,
         "impressions": 2641,
         "reach": 2109,
         "clicks": 31,
@@ -1671,7 +1671,7 @@
         "comments": 12,
         "reactions": 58,
         "engagements": 134,
-        "engagementsPer100": 134.0,
+        "engagementsPer100": 135.4,
         "savesSharesPer1k": 12.5,
         "breakdown": [
           {
@@ -1809,7 +1809,7 @@
         "results": 14,
         "resultType": "Messaging conversations started",
         "linkClicks": 31,
-        "costPerResult": 7.14,
+        "costPerResult": 7.07,
         "adName": "A3 Sala before guests"
       },
       {
@@ -1817,7 +1817,7 @@
         "code": "A6",
         "audienceName": "Office exchange gift draw",
         "matchedBy": "code",
-        "spend": 100,
+        "spend": 99,
         "impressions": 3117,
         "reach": 2493,
         "clicks": 24,
@@ -1826,7 +1826,7 @@
         "comments": 10,
         "reactions": 51,
         "engagements": 105,
-        "engagementsPer100": 105.0,
+        "engagementsPer100": 106.1,
         "savesSharesPer1k": 6.4,
         "breakdown": [
           {
@@ -1964,7 +1964,7 @@
         "results": 10,
         "resultType": "Messaging conversations started",
         "linkClicks": 24,
-        "costPerResult": 10.0,
+        "costPerResult": 9.9,
         "adName": "A6 Office exchange gift"
       },
       {
@@ -1972,7 +1972,7 @@
         "code": "A5",
         "audienceName": "Barkada unit splitting the bills",
         "matchedBy": "code",
-        "spend": 100,
+        "spend": 99,
         "impressions": 3290,
         "reach": 2655,
         "clicks": 22,
@@ -1981,7 +1981,7 @@
         "comments": 11,
         "reactions": 40,
         "engagements": 95,
-        "engagementsPer100": 95.0,
+        "engagementsPer100": 96.0,
         "savesSharesPer1k": 6.7,
         "breakdown": [
           {
@@ -2119,7 +2119,7 @@
         "results": 8,
         "resultType": "Messaging conversations started",
         "linkClicks": 22,
-        "costPerResult": 12.5,
+        "costPerResult": 12.38,
         "adName": "A5 Barkada unit ambagan"
       },
       {
@@ -2127,7 +2127,7 @@
         "code": "A4",
         "audienceName": "Home from the night shift",
         "matchedBy": "code",
-        "spend": 100,
+        "spend": 99,
         "impressions": 2906,
         "reach": 2377,
         "clicks": 19,
@@ -2136,7 +2136,7 @@
         "comments": 8,
         "reactions": 46,
         "engagements": 88,
-        "engagementsPer100": 88.0,
+        "engagementsPer100": 88.9,
         "savesSharesPer1k": 5.2,
         "breakdown": [
           {
@@ -2274,7 +2274,7 @@
         "results": 7,
         "resultType": "Messaging conversations started",
         "linkClicks": 19,
-        "costPerResult": 14.29,
+        "costPerResult": 14.14,
         "adName": "A4 Night shift home"
       },
       {
@@ -2282,7 +2282,7 @@
         "code": "A2",
         "audienceName": "Salcedo Saturday condo reset",
         "matchedBy": "code",
-        "spend": 100,
+        "spend": 99,
         "impressions": 3478,
         "reach": 2836,
         "clicks": 20,
@@ -2291,7 +2291,7 @@
         "comments": 4,
         "reactions": 41,
         "engagements": 82,
-        "engagementsPer100": 82.0,
+        "engagementsPer100": 82.8,
         "savesSharesPer1k": 4.9,
         "breakdown": [
           {
@@ -2429,7 +2429,7 @@
         "results": 6,
         "resultType": "Messaging conversations started",
         "linkClicks": 20,
-        "costPerResult": 16.67,
+        "costPerResult": 16.5,
         "adName": "A2 Salcedo Saturday"
       },
       {
@@ -2437,7 +2437,7 @@
         "code": "A7",
         "audienceName": "Monthsary tomorrow, no gift yet",
         "matchedBy": "code",
-        "spend": 100,
+        "spend": 99,
         "impressions": 2254,
         "reach": 1846,
         "clicks": 14,
@@ -2446,7 +2446,7 @@
         "comments": 6,
         "reactions": 37,
         "engagements": 66,
-        "engagementsPer100": 66.0,
+        "engagementsPer100": 66.7,
         "savesSharesPer1k": 4.0,
         "breakdown": [
           {
@@ -2584,7 +2584,7 @@
         "results": 4,
         "resultType": "Messaging conversations started",
         "linkClicks": 14,
-        "costPerResult": 25.0,
+        "costPerResult": 24.75,
         "adName": "A7 Monthsary tomorrow"
       },
       {
@@ -2592,7 +2592,7 @@
         "code": "A1",
         "audienceName": "After a Cubao Expo thrift haul",
         "matchedBy": "code",
-        "spend": 100,
+        "spend": 99,
         "impressions": 3762,
         "reach": 3015,
         "clicks": 15,
@@ -2601,7 +2601,7 @@
         "comments": 3,
         "reactions": 23,
         "engagements": 58,
-        "engagementsPer100": 58.0,
+        "engagementsPer100": 58.6,
         "savesSharesPer1k": 4.5,
         "breakdown": [
           {
@@ -2739,7 +2739,7 @@
         "results": 2,
         "resultType": "Messaging conversations started",
         "linkClicks": 15,
-        "costPerResult": 50.0,
+        "costPerResult": 49.5,
         "adName": "A1 Cubao Expo thrift haul"
       },
       {
@@ -2747,7 +2747,7 @@
         "code": "A8",
         "audienceName": "Café and salon counters",
         "matchedBy": "code",
-        "spend": 100,
+        "spend": 99,
         "impressions": 1563,
         "reach": 1298,
         "clicks": 7,
@@ -2756,7 +2756,7 @@
         "comments": 1,
         "reactions": 18,
         "engagements": 29,
-        "engagementsPer100": 29.0,
+        "engagementsPer100": 29.3,
         "savesSharesPer1k": 1.9,
         "breakdown": [
           {
@@ -2894,7 +2894,7 @@
         "results": 1,
         "resultType": "Messaging conversations started",
         "linkClicks": 7,
-        "costPerResult": 100.0,
+        "costPerResult": 99.0,
         "adName": "A8 Cafe salon counter"
       }
     ],
@@ -2906,8 +2906,8 @@
       "who": "Someone who has guests over this December and gets the sala ready before they arrive. Thirty minutes before the doorbell: the guest glasses are out, but the house still smells like lunch.",
       "reachedMostly": "Mostly women, largest group 25-34, about half in Metro Manila",
       "whatWorked": [
-        "A3 started 14 message conversations for ₱100, about ₱7 each. A6 came next with 10, ₱10 each.",
-        "It also got the most link clicks: 31 for ₱100, against 24 for A6.",
+        "A3 started 14 message conversations for ₱99. A6 came next with 10.",
+        "It also got the most link clicks: 31 for ₱99, against 24 for A6.",
         "The hook named the moment, not the person: \"nagluto ako ng 5 ulam pero ang tinanong ng bisita: ano yung mabango? 😭\""
       ],
       "whatToPostNext": [
@@ -2916,7 +2916,7 @@
         "Keep day 4 for Office exchange gift draw, to see if second place holds."
       ],
       "confidence": "strong",
-      "caveat": "Each audience got ₱100 for 3 days, so these are small numbers: 14 conversations against 10. That clears Hunch's bar for a clear lead, but with numbers this small, next week's posts are the real check on whether it holds into December."
+      "caveat": "Each audience got ₱99 for 3 days, so these are small numbers: 14 conversations against 10. That clears Hunch's bar for a clear lead, but with numbers this small, next week's posts are the real check on whether it holds into December."
     },
     "unmatchedRows": [],
     "notes": [
@@ -2929,47 +2929,47 @@
       "ranking": [
         {
           "code": "A3",
-          "value": 7.14
+          "value": 7.07
         },
         {
           "code": "A6",
-          "value": 10.0
+          "value": 9.9
         },
         {
           "code": "A5",
-          "value": 12.5
+          "value": 12.38
         },
         {
           "code": "A4",
-          "value": 14.29
+          "value": 14.14
         },
         {
           "code": "A2",
-          "value": 16.67
+          "value": 16.5
         },
         {
           "code": "A7",
-          "value": 25.0
+          "value": 24.75
         },
         {
           "code": "A1",
-          "value": 50.0
+          "value": 49.5
         },
         {
           "code": "A8",
-          "value": 100.0
+          "value": 99.0
         }
       ],
       "winnerCode": "A3",
       "runnerUpCode": "A6",
       "confidence": "high",
-      "explanation": "Hosts getting the sala ready won: A3 started 14 message conversations for ₱100, about ₱7 each. Office exchange gift draw came second with 10, ₱10 each, so A3 cost about 29% less per conversation. Next week, aim six posts at hosting at home and keep day 4 to test the exchange gift again.",
+      "explanation": "Hosts getting the sala ready won: A3 started 14 message conversations for ₱99. Office exchange gift draw came second with 10. Next week, aim six posts at hosting at home and keep day 4 to test the exchange gift again.",
       "caveats": [],
       "caveatChecks": [
         {
           "rule": "Total spend under ₱400",
           "fired": false,
-          "value": "₱800 total"
+          "value": "₱792 total"
         },
         {
           "rule": "Runner-up within 10%",
@@ -2979,12 +2979,12 @@
         {
           "rule": "Spend differs by more than 20% between audiences",
           "fired": false,
-          "value": "₱100 each"
+          "value": "₱99 each"
         }
       ],
       "margin": {
-        "winnerCostPerResult": 7.14,
-        "runnerUpCostPerResult": 10.0,
+        "winnerCostPerResult": 7.07,
+        "runnerUpCostPerResult": 9.9,
         "percentCheaper": 28.6,
         "percentMoreForRunnerUp": 40.0,
         "winnerResults": 14
@@ -3542,7 +3542,7 @@
             "cta": "Mag-message sa amin"
           }
         },
-        "why": "The barkada unit came third and had more shares than any post but the winner. Hosting won, so one ₱100 post tests the two together: a watch party at the shared unit."
+        "why": "The barkada unit came third and had more shares than any post but the winner. Hosting won, so one ₱99 post tests the two together: a watch party at the shared unit."
       },
       {
         "id": "v_elle_t2",
@@ -3607,7 +3607,7 @@
             "cta": "Mag-message sa amin"
           }
         },
-        "why": "Home from the night shift came fourth. Many night-shift teams work through Christmas, so one ₱100 post tests if a Christmas-morning moment brings more messages than the everyday 7 AM post."
+        "why": "Home from the night shift came fourth. Many night-shift teams work through Christmas, so one ₱99 post tests if a Christmas-morning moment brings more messages than the everyday 7 AM post."
       }
     ],
     "notes": [

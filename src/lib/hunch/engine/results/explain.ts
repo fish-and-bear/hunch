@@ -27,17 +27,14 @@ export function templateExplanation(v: Omit<Verdict, "explanation">, rows: Row[]
   if (!w) return "There was not enough data to pick a winner. Add spend and results for each post.";
   const wName = names[w.code] ?? w.code;
   const ruName = ru ? (names[ru.code] ?? ru.code) : "";
-  const pct = Math.round(v.margin?.percent ?? 0);
   const out: string[] = [];
   if (v.metric === "cost_per_result") {
     const words = resultWords(w.resultType);
-    const cpr = (r: Row) => (r.results ? r.spend / r.results : 0);
-    out.push(`${wName} won: ${w.code} ${words.verb} ${count(w.results ?? 0, words.one, words.many)} for ${peso(w.spend)}, about ${peso(cpr(w))} each.`);
-    if (ru) out.push(`${ruName} came second with ${(ru.results ?? 0).toLocaleString("en-PH")}, about ${peso(cpr(ru))} each, so ${w.code} cost about ${pct}% less per ${words.per}.`);
+    out.push(`${wName} won: ${w.code} ${words.verb} ${count(w.results ?? 0, words.one, words.many)} for ${peso(w.spend)}.`);
+    if (ru) out.push(`${ruName} came second with ${(ru.results ?? 0).toLocaleString("en-PH")}.`);
   } else if (v.metric === "cost_per_link_click") {
-    const cpc = (r: Row) => (r.linkClicks ? r.spend / r.linkClicks : 0);
-    out.push(`${wName} won: ${w.code} got ${count(w.linkClicks ?? 0, "link click", "link clicks")} for ${peso(w.spend)}, about ${peso(cpc(w))} each.`);
-    if (ru) out.push(`${ruName} came second at about ${peso(cpc(ru))} a click, so ${w.code} cost about ${pct}% less per click.`);
+    out.push(`${wName} won: ${w.code} got ${count(w.linkClicks ?? 0, "link click", "link clicks")} for ${peso(w.spend)}.`);
+    if (ru) out.push(`${ruName} came second with ${(ru.linkClicks ?? 0).toLocaleString("en-PH")}.`);
   } else {
     const ctr = (r: Row) => (r.impressions ? ((r.linkClicks ?? 0) / r.impressions) * 100 : 0);
     out.push(`${wName} won: ${ctr(w).toFixed(1)}% of the people who saw ${w.code} clicked, the highest of the ${rows.length}.`);
@@ -96,8 +93,8 @@ export function buildIcp(opts: {
   const whatWorked: string[] = [];
   if (verdict.metric === "cost_per_result" && winner.results) {
     whatWorked.push(
-      `${winner.code} ${words.verb} ${count(winner.results, words.one, words.many)} for ${peso(winner.spend)}, about ${peso(winner.spend / winner.results)} each.${
-        runnerUp?.results ? ` ${runnerUp.code} came next with ${runnerUp.results}, ${peso(runnerUp.spend / runnerUp.results)} each.` : ""
+      `${winner.code} ${words.verb} ${count(winner.results, words.one, words.many)} for ${peso(winner.spend)}.${
+        runnerUp?.results ? ` ${runnerUp.code} came next with ${runnerUp.results}.` : ""
       }`,
     );
   } else if (winner.linkClicks) {

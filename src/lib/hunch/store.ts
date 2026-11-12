@@ -54,8 +54,8 @@ const KEYS = {
   studio: "hunch.studio",
 } as const
 
-export function setupFor(budget: BudgetPreset = 800): TestSetup {
-  return { budget, perPost: Math.round(budget / 8), days: 3 }
+export function setupFor(perPost: BudgetPreset = 99): TestSetup {
+  return { budget: perPost * 8, perPost, days: 3 }
 }
 
 const EMPTY: HunchState = {
@@ -70,7 +70,7 @@ const EMPTY: HunchState = {
   focusFor: null,
   language: null,
   postLanguage: {},
-  setup: setupFor(800),
+  setup: setupFor(99),
   grid: null,
   handedOff: {},
   studio: null,
@@ -136,7 +136,7 @@ function load() {
     focusFor: run ? (focus?.forReport ?? null) : null,
     language: prefs?.language ? normalizeLanguage(prefs.language) : null,
     postLanguage: Object.fromEntries(Object.entries(prefs?.postLanguage ?? {}).map(([k, v]) => [k, normalizeLanguage(v)])),
-    setup: setupFor(prefs?.budget === 400 || prefs?.budget === 1600 ? prefs.budget : 800),
+    setup: setupFor(prefs?.budget === 49 || prefs?.budget === 199 ? prefs.budget : 99),
     grid: read<GridRow[]>(KEYS.grid),
     handedOff: read<Record<string, number>>(KEYS.handedOff) ?? {},
     studio,
@@ -158,7 +158,7 @@ function set(patch: Partial<HunchState>) {
   if ("handedOff" in patch) write(KEYS.handedOff, patch.handedOff)
   if ("studio" in patch) write(KEYS.studio, patch.studio)
   if ("language" in patch || "postLanguage" in patch || "setup" in patch) {
-    write(KEYS.prefs, { language: state.language, postLanguage: state.postLanguage, budget: state.setup.budget } satisfies Prefs)
+    write(KEYS.prefs, { language: state.language, postLanguage: state.postLanguage, budget: state.setup.perPost } satisfies Prefs)
   }
   if ("focus" in patch || "focusFor" in patch) {
     write(KEYS.focus, state.focus && state.focusFor ? { plan: state.focus, forReport: state.focusFor } : null)

@@ -60,7 +60,7 @@ function SureDial({ report, words }: { report: ResultsReport; words: MetricWords
   const why =
     pct != null && v.runnerUpCode
       ? `${pct}% ${words.lower ? "cheaper than" : "ahead of"} the next best.`
-      : `${peso(report.totalSpend)} over ${report.days} ${report.days === 1 ? "day" : "days"} is a first signal.`
+      : `${report.days} ${report.days === 1 ? "day" : "days"} is a first signal.`
   return (
     <div className="hr-dial" tabIndex={0} aria-describedby={tip}>
       <svg viewBox="0 0 120 66" aria-hidden>
@@ -155,7 +155,6 @@ export function WinnerPoster({
   const w = t.winner
   if (!w) return null
   const f = frame(w.v)
-  const cost = t.cost(w.value)
   const hasAges = w.m.breakdown.some((c) => c.impressions > 0)
   const ru = t.runnerUp && t.runnerUp.v.id !== w.v.id ? t.runnerUp : null
 
@@ -183,12 +182,6 @@ export function WinnerPoster({
             <Num value={w.n.toLocaleString("en-PH")} />
             <span>{t.unit(w.n)}</span>
           </p>
-          {cost ? (
-            <p className="hr-bub hr-bub-b">
-              <Num value={cost.n} />
-              <span>{cost.of}</span>
-            </p>
-          ) : null}
         </div>
         {report.isSample ? <p className="hh-label hr-note">Sample numbers. No real ads were run.</p> : null}
       </div>
@@ -218,11 +211,10 @@ export function Race({ report, run, words }: { report: ResultsReport; run: TestR
         <p className="hh-line ha-line">{`See which of the ${t.ranked.length} posts got people to ${got}.`}</p>
       </header>
       <ol className="hr-cols" data-rise>
-        {t.ranked.map(({ v, m, n, value }, i) => {
+        {t.ranked.map(({ v, m, n }, i) => {
           const first = v.id === t.winner?.v.id
           const start = (t.ranked.length - 1 - i) * 0.08
           const f = frame(v)
-          const cost = t.cost(value)
           return (
             <li key={v.id} data-size={sizeOf(i)} data-first={first ? "" : undefined} style={{ "--i": t.ranked.length - 1 - i, "--tilt-z": `${TILT[i % TILT.length]}deg` } as React.CSSProperties}>
               <span aria-hidden className="hr-stack">
@@ -236,7 +228,6 @@ export function Race({ report, run, words }: { report: ResultsReport; run: TestR
               <p className="hr-col-cap">
                 <b className="hh-dot">{n > 0 ? n.toLocaleString("en-PH") : "No"}</b> <span className="hr-unit">{t.unit(n)}</span>
                 <span className="hr-col-name">{v.audienceName}</span>
-                {cost && n > 0 ? <span className="hr-col-cost">{`${cost.n} ${cost.of}`}</span> : null}
               </p>
             </li>
           )

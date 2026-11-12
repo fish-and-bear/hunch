@@ -2,7 +2,7 @@
 
 import * as React from "react"
 
-import { audienceById, costText, dayWord, metricsByCode, photoUrlOf, report, resultsOf, run, unit, units } from "../data"
+import { audienceById, dayWord, metricsByCode, photoUrlOf, report, resultsOf, run, units } from "../data"
 import { perPost, pesos } from "../story/shared"
 import { HomePost } from "../ugc-post"
 
@@ -15,7 +15,6 @@ const count = (code: string) => {
 // Most messages first.
 const ranked = [...posts].sort((a, b) => count(b.code) - count(a.code))
 const lead = ranked[0]
-const leadMetrics = lead ? metricsByCode.get(lead.code) : undefined
 
 export const TYPED = "Soy candles poured at home"
 const price = run.product.price ?? ""
@@ -86,7 +85,6 @@ export const PostsMock = React.memo(function PostsMock({ t, boost }: { t: number
         {boost ? (
           <span>
             Day {day} of {report.days}
-            <i>. {pesos(Math.round((report.totalSpend * p) / perPost) * perPost)} spent</i>
           </span>
         ) : (
           <span>One for each kind of buyer</span>
@@ -131,7 +129,6 @@ export const ResultsMock = React.memo(function ResultsMock({ t }: { t: number })
           <b className="hh-dot">{Math.round(top * p)}</b>
           <span>
             <b>{units}</b>
-            {leadMetrics ? `${costText(leadMetrics)} a ${unit}` : ""}
           </span>
         </span>
       </div>
