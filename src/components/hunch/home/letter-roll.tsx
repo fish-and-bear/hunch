@@ -7,7 +7,7 @@ export function LetterRoll({ text, className, step = 18 }: { text: string; class
   return (
     <span className={cn("relative inline-flex", className)}>
       <span className="sr-only">{text}</span>
-      <span aria-hidden className="inline-flex overflow-hidden">
+      <span aria-hidden className="inline-flex select-none overflow-hidden">
         {Array.from(text).map((ch, i) => (
           <span key={i} className="relative inline-block">
             <span

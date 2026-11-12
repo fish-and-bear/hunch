@@ -199,12 +199,8 @@ A chat with Hunch. At most 4 questions; each answer is one line of 12 words or f
 
 ## footer.tsx
 
-- No wordmark and no tagline: the header already shows both.
-- Links heading: See each step with Elle's sample
-- Links: Start / Studio / Your 8 hunches / Your 8 posts / Run the test / Results / Next week
-- Small print: Made in Manila for sellers just starting out.
-- Small print, sample mode: Sample data. No real ads were run.
-- Small print, right: Back to top
+- One row: Made in Manila for sellers just starting out. / Open Elle’s test / Back to top
+- No step list, no wordmark, no tagline, no sample note.
 
 ## hidden-ending.tsx
 

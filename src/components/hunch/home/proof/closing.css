@@ -147,7 +147,7 @@
 
 /* Footer. */
 .ft {
-  padding: calc(88 * var(--u)) var(--gutter) 28px;
+  padding: calc(40 * var(--u)) var(--gutter) 28px;
   background: var(--cream-deep);
 }
 .ft-top {
@@ -213,12 +213,17 @@
   transition: opacity 0.15s linear;
 }
 .ft-up {
-  margin-left: auto;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 .ft-small p:first-child {
   margin-right: auto;
+}
+.ft-small {
+  gap: 6px 28px;
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
 }
 .ft-link:active {
   opacity: 0.6;
