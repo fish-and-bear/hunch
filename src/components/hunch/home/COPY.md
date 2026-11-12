@@ -24,7 +24,7 @@ One metaphor: a hunch becomes messages. Say "hunch" for the guess, "messages" fo
 - Typewriter examples, each short enough for one line in the box at 390 px: Soy candles, ₱350 a jar / Matcha in 30 g tins, ₱480 / Calamansi soap, ₱120 a bar / Crochet plant hangers / Thrifted denim jackets
 - Send button aria-label: Write my 8 posts
 - Empty submit tooltip: Type what you sell first.
-- Hint, sample mode: Sample run. Your product's name and price go into a saved test.
+- Hint, sample mode: none, only the Open Elle's test link.
 - Hint, live mode: Next you add a photo. Nothing is posted for you.
 - Link after the hint: Open Elle's test
 

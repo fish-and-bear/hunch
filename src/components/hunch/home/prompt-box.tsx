@@ -162,10 +162,7 @@ export function PromptBox({
     router.push(`/start?d=${encodeURIComponent(line)}`)
   }
 
-  const hint =
-    serverMode === "sample"
-      ? "Sample run. Your product's name and price go into a saved test."
-      : "Next you add a photo. Nothing is posted for you."
+  const hint = serverMode === "sample" ? null : "Next you add a photo. Nothing is posted for you."
 
   return (
     <div className={cn("w-full", className)}>
@@ -231,7 +228,7 @@ export function PromptBox({
         </div>
       </form>
       <p data-prompt-hint id={hintId} className="hx-hint">
-        {hint}{" "}
+        {hint ? `${hint} ` : null}
         <Link href={SAMPLE_HREF} aria-disabled={busy || undefined} className="hx-hint-link">
           Open Elle&rsquo;s test
         </Link>
