@@ -9,7 +9,7 @@ One metaphor: a hunch becomes messages. Say "hunch" for the guess, "messages" fo
 - Logo: the mark, then the wordmark `hunch` (aria-label "Hunch, home")
 - Link: How it works
 - Link: Elle's test
-- Button: Find my buyers
+- Button: Try it free
 
 ## hero (done): hero/headline.tsx, hero/post-ring.tsx
 
@@ -188,7 +188,7 @@ A chat with Hunch. At most 4 questions; each answer is one line of 12 words or f
 - Q: Does it target by age or religion?
   A: Never. Not by age, religion or health.
 - Quick replies under the thread: the questions not asked yet, word for word.
-- Button after the last answer (and when the whole thread shows at once): Find my buyers
+- Button after the last answer (and when the whole thread shows at once): Try it free
 - The first question sends itself. No "typing" label, no timestamps, no "Seen".
 
 ## cta-band.tsx
@@ -206,7 +206,7 @@ A chat with Hunch. At most 4 questions; each answer is one line of 12 words or f
 
 - Heading: Go find your buyers.
 - No hint line: the dots explain themselves.
-- Button: Find my buyers (goes to /start)
+- Button: Try it free (goes to /start)
 
 ## Lines to delete wherever they still appear
 

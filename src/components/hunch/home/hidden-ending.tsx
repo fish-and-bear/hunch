@@ -73,7 +73,7 @@ export function HiddenEnding() {
       <div className="he-words">
         <h2 className="hh-display he-title">Go find your buyers.</h2>
         <Link href="/start" className="hh-pill hh-pill-light he-top group">
-          <LetterRoll text="Find my buyers" />
+          <LetterRoll text="Try it free" />
         </Link>
       </div>
     </section>
