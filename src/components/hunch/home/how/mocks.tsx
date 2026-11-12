@@ -17,7 +17,7 @@ const ranked = [...posts].sort((a, b) => count(b.code) - count(a.code))
 const lead = ranked[0]
 
 export const TYPED = "Soy candles poured at home"
-const price = run.product.price ?? ""
+const price = (run.product.price ?? "").split(" ")[0]
 const channels = (run.product.whereSold ?? "")
   .split(" (")[0]
   .split(/,\s*|\s+and\s+/)

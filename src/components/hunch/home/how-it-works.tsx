@@ -9,10 +9,10 @@ import { RiseWords, useLoop } from "./story/shared"
 import "./how/how.css"
 
 const STEPS = [
-  { title: "Type what you sell.", line: "Add a photo, a price and where you sell." },
-  { title: `Get ${HOW.posts} posts.`, line: "One for each kind of buyer." },
-  { title: `Put ${HOW.perPost} behind each post.`, line: `Promote it on the app you sell on, for ${HOW.days}.` },
-  { title: "See who messaged.", line: `Type in the results to see who sent the most ${HOW.units}.` },
+  { title: "Say what you sell.", line: "A photo and a price. That’s it." },
+  { title: `Get ${HOW.posts} posts.`, line: "Each one talks to a different buyer." },
+  { title: `Put ${HOW.perPost} on each.`, line: `Promote them for ${HOW.days}.` },
+  { title: "See who messages.", line: "The post with the most is your buyer." },
 ]
 const LAST = STEPS.length - 1
 // The step clock stops once every mock has finished playing.
@@ -139,10 +139,11 @@ export function HowItWorks() {
     <section ref={section} id="how-it-works" aria-labelledby="how-it-works-title" className="hw">
       <div ref={pin} className="hw-pin">
         <motion.div className="hw-head" style={asideStyle}>
-          <RiseWords id="how-it-works-title" parts={[{ text: `Run it in ${HOW.days}.` }]} className="hh-title sy-h" />
-          <p className="hh-line sy-support">
-            It takes {STEPS.length} steps and {HOW.perPost} a post.
-          </p>
+          <RiseWords
+            id="how-it-works-title"
+            parts={[{ text: "Know who would buy", className: "block" }, { text: `your product in ${HOW.days}.`, className: "block" }]}
+            className="hh-title sy-h hw-title"
+          />
         </motion.div>
         <span ref={mark} className="hw-mark" />
         <div ref={play} className="hw-play">
@@ -161,7 +162,7 @@ export function HowItWorks() {
             </div>
             <i key={s.step} className="hw-wash" />
           </motion.div>
-          <motion.ol className="hw-steps" style={asideStyle}>
+          <motion.ol className="hw-steps" style={{ ...asideStyle, "--hw-done": (s.step + 1) / STEPS.length } as React.CSSProperties}>
             {STEPS.map((step, i) => (
               <li key={step.title} data-on={i === s.step ? "" : undefined}>
                 <button type="button" className="hw-step" aria-current={i === s.step ? "step" : undefined} onClick={() => go(i)}>

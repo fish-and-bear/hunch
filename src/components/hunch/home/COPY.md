@@ -41,16 +41,13 @@ One metaphor: a hunch becomes messages. Say "hunch" for the guess, "messages" fo
 
 ## how-it-works.tsx and how/
 
-- Heading: Run it in 3 days.
+- Heading, two lines: Know who would buy / your product in 3 days.
 - Support line: Follow 4 steps from one line to real messages.
-- Step 1 title: Type what you sell.
-- Step 1 line: Add a photo, a price and where you sell.
-- Step 2 title: Get 8 posts.
-- Step 2 line: Read one post for each kind of buyer.
-- Step 3 title: Put ₱100 behind each post. Line: Promote it on the app you sell on, for 3 days.
-- Step 3 line: Run them on your own Facebook page for 3 days.
-- Step 4 title: See who messaged.
-- Step 4 line: Type in the results and see which buyers sent the most messages.
+- Step 1: Say what you sell. / A photo and a price. That’s it.
+- Step 2: Get 8 posts. / Each one talks to a different buyer.
+- Step 3: Put ₱99 on each. / Promote them for 3 days.
+- Step 4: See who messages. / The post with the most is your buyer.
+- Steps: the open one in full ink, the rest faded; a thin rail beside them fills with the sun gradient step by step.
 - Step 1 mock, the start screen: What do you sell? / typed line "Soy candles poured at home" / Add a photo / Price, with the price from the data ("₱350 per 180 g jar") / Where you sell, with the channels from the data ticked (Shopee, Instagram, Facebook) / button: Write my 8 posts
 - Step 2 mock: Your 8 posts / One for each kind of buyer / under each post, the audience name from the data
 - Step 3 mock: Promoted / Day 1 of 3, then 2, then 3, with "₱800 spent" counting beside it / under each post: ₱100 and a bar in 3 parts, one per day
@@ -98,7 +95,7 @@ Winner (red field), `proof/winner.tsx`:
 
 ## how-it-works.tsx and how/
 
-- Heading: Run it in 3 days.
+- Heading, two lines: Know who would buy / your product in 3 days.
 - Support line: Follow 4 steps from one line to real messages.
 - Step 1 title: Type what you sell.
 - Step 1 line: Add a photo, a price and where you sell.
