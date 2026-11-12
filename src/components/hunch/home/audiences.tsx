@@ -15,8 +15,6 @@ import { HomePost } from "./ugc-post"
 
 const picked = run.chosen.filter((a) => versionByAudience.has(a.id))
 const everyone = run.candidates
-// The guess most sellers would make, which Hunch cut.
-const obvious = everyone.find((a) => !run.chosen.some((c) => c.id === a.id) && /lovers/i.test(a.name))
 const cutReason = new Map((run.cuts ?? []).map((c) => [c.id, c.reason]))
 const cutCount = everyone.length - picked.length
 
@@ -102,10 +100,7 @@ export function Audiences() {
   return (
     <section id="audiences" aria-labelledby="audiences-title" className="sy-buyers">
       <div className="sy-buyers-head">
-        <RiseWords id="audiences-title" parts={[
-            ...(obvious ? [{ text: `You’d bet on ${lowerFirst(obvious.name).replace(/\.$/, "")}.`, className: "block" }] : []),
-            { text: `Hunch tried ${everyone.length} buyers and kept ${picked.length}.`, className: "block" },
-          ]} className="hh-title sy-h" />
+        <RiseWords id="audiences-title" parts={[{ text: "Who buys candles? Maybe…" }]} className="hh-title sy-h" />
       </div>
 
       <div className="sy-buyers-body">
