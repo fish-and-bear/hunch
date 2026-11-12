@@ -29,8 +29,7 @@ One metaphor: a hunch becomes messages. Say "hunch" for the guess, "messages" fo
 
 ## audiences.tsx (the 8 kinds of buyers)
 
-- Heading: 8 hunches about who buys.
-- Support line: Meet the 8 kinds of buyers Hunch picked for Elle's candles.
+- Heading, two lines: You’d bet on candle lovers. / Hunch tried 20 buyers and kept 8. (the obvious guess is a cut candidate, struck through in the list right below; no support line)
 - Each buyer: the audience name as the title, its post as a phone frame beside it, and the `situation` sentence from the data as the only text. No field labels.
 - Control to see the rest: Show all 20 / Show the 8
 - A buyer that was not picked: its name, struck through softly, and its cut reason from the data.
@@ -87,8 +86,7 @@ Winner (red field), `proof/winner.tsx`:
 
 ## audiences.tsx (the 8 kinds of buyers)
 
-- Heading: 8 hunches about who buys.
-- Support line: Meet the 8 kinds of buyers Hunch picked for Elle's candles.
+- Heading, two lines: You’d bet on candle lovers. / Hunch tried 20 buyers and kept 8. (the obvious guess is a cut candidate, struck through in the list right below; no support line)
 - Each buyer: the audience name as the title, its post as a phone frame beside it, and the `situation` sentence from the data as the only text. No field labels.
 - Control to see the rest: Show all 20 / Show the 8
 - A buyer that was not picked: its name, struck through softly, and its cut reason from the data.
