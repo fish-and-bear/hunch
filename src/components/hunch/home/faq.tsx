@@ -207,7 +207,7 @@ export function Faq() {
             : null}
           {finished ? (
             <a href="#try" className="hh-pill fc-try group">
-              <LetterRoll text="Try your product" />
+              <LetterRoll text="Find my buyers" />
             </a>
           ) : null}
         </div>
