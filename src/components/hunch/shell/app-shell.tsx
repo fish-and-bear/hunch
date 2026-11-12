@@ -36,7 +36,7 @@ function badgeFor(step: StepKey, s: HunchState, serverMode: Mode): Badge {
   return serverMode === "sample" ? "Sample run" : null
 }
 
-function badgeTitle(badge: Exclude<Badge, null>, _s: HunchState) {
+function badgeTitle(badge: Exclude<Badge, null>) {
   return badge === "Sample data" ? "Sample data. No real ads were run." : "Sample run."
 }
 
@@ -88,11 +88,11 @@ export function AppShell({
               </Link>
               <StepIndicator current={step} from={from} className="ml-auto hidden lg:block" />
               {badge ? (
-                <p title={badgeTitle(badge, s)} className="ha-label hidden shrink-0 xl:block">
+                <p title={badgeTitle(badge)} className="ha-label hidden shrink-0 xl:block">
                   {badge}
                 </p>
               ) : null}
-              <StepMenu current={step} note={badge ? badgeTitle(badge, s) : null} className="ml-auto lg:hidden" />
+              <StepMenu current={step} note={badge ? badgeTitle(badge) : null} className="ml-auto lg:hidden" />
             </div>
             <StepBar current={step} from={from} className="lg:hidden" />
           </header>
