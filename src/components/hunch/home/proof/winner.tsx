@@ -6,15 +6,12 @@ import { motion, useScroll, useTransform } from "framer-motion"
 import { lowerFirst } from "@/components/hunch/screens/shared"
 
 import { HomePost } from "../ugc-post"
-import { costOf } from "../data"
 import { runnerUp, unitWord, winner } from "./data"
 import { useReveal } from "./reveal"
 import { useMoving } from "../scroll/film"
 
 type Fact = { figure: string; label: string }
 
-// Exact cost, two decimals only when it isn't whole.
-const exact = (n: number) => `₱${Number.isInteger(n) ? n : n.toFixed(2)}`
 
 /** The winning buyers, what they did, and what comes next. */
 export function Winner({ onOpen }: { onOpen: (id: string) => void }) {
@@ -31,12 +28,10 @@ export function Winner({ onOpen }: { onOpen: (id: string) => void }) {
   const sink = useTransform(leave, [0, 1], [0, 150])
   if (!winner) return null
   const next = runnerUp && runnerUp.v.id !== winner.v.id ? runnerUp : null
-  const cost = costOf(winner.m)
-  const nextCost = next ? costOf(next.m) : null
 
   const facts: Fact[] = [{ figure: String(winner.n), label: unitWord(winner.n) }]
-  if (cost != null) facts.push({ figure: exact(cost), label: `per ${unitWord(1)}` })
-  const second = next ? `${next.v.audienceName} came second with ${next.n}${nextCost != null ? `, at ${exact(nextCost)} per ${unitWord(1)}` : ""}.` : null
+  if (winner.m.spend > 0) facts.push({ figure: `₱${Math.round(winner.m.spend)}`, label: "spent" })
+  const second = next ? `${next.v.audienceName} came second with ${next.n} ${unitWord(next.n)}.` : null
 
   return (
     <div ref={ref} className="pw hh-field hh-field-sili hh-grain">

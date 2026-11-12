@@ -55,7 +55,65 @@ One metaphor: a hunch becomes messages. Say "hunch" for the guess, "messages" fo
 - Step 1 mock, the start screen: What do you sell? / typed line "Soy candles poured at home" / Add a photo / Price, with the price from the data ("₱350 per 180 g jar") / Where you sell, with the channels from the data ticked (Shopee, Instagram, Facebook) / button: Write my 8 posts
 - Step 2 mock: Your 8 posts / One for each kind of buyer / under each post, the audience name from the data
 - Step 3 mock: Promoted / Day 1 of 3, then 2, then 3, with "₱800 spent" counting beside it / under each post: ₱100 and a bar in 3 parts, one per day
-- Step 4 mock: Most messages / the winner's audience name / `14` messages / ₱7 a message / then all 8 audience names, most messages first, one dot per message and the count
+- Step 4 mock: Most messages / the winner's audience name / `14` messages / then all 8 audience names, most messages first, one dot per message and the count
+- Steps carry no numbers. Only the open step shows its line. On phones only the open step shows at all.
+
+## your-people.tsx and proof/ (the result)
+
+Results (cream), `proof/results.tsx`:
+
+- Heading: ₱800 found Elle's buyers.
+- Support line: See which of the 8 posts got people to message.
+- Above each post: `{n}` messages (or "1 message", "No messages"), set in type. The winner's count is the big red one.
+- Under each bar: the audience name, nothing else.
+- Post button aria-label: Open the post for {audience}
+
+Winner (red field), `proof/winner.tsx`:
+
+- Title: the audience name (Hosts getting the sala ready)
+- Kicker above it: Most messages came from
+- Facts: `14` messages / `₱100` spent (no cost per message: readers had to do the math)
+- Runner-up line: {audience} came second with 10 messages.
+- Post button aria-label: Open the post for {audience}
+
+## prompt-box.tsx (done)
+
+- Field label (screen readers): What do you sell?
+- Typewriter examples, each short enough for one line in the box at 390 px: Soy candles, ₱350 a jar / Matcha in 30 g tins, ₱480 / Calamansi soap, ₱120 a bar / Crochet plant hangers / Thrifted denim jackets
+- Send button aria-label: Write my 8 posts
+- Empty submit tooltip: Type what you sell first.
+- Under the box: only the Open Elle's test link, in every mode.
+- Link after the hint: Open Elle's test
+
+## audiences.tsx (the 8 kinds of buyers)
+
+- Heading: 8 hunches about who buys.
+- Support line: Meet the 8 kinds of buyers Hunch picked for Elle's candles.
+- Each buyer: the audience name as the title, its post as a phone frame beside it, and the `situation` sentence from the data as the only text. No field labels.
+- Control to see the rest: Show all 20 / Show the 8
+- A buyer that was not picked: its name, struck through softly, and its cut reason from the data.
+- Post button aria-label: Open the post for {audience}
+- Empty state (no audiences in the data): No buyers yet. Type what you sell.
+- The list opens with all 20 names, strikes the 12, then settles on the 8. No line explains it.
+- Under the phone: the lit buyer's `situation` sentence, nothing else.
+- Cut reason fallback (a cut with no reason in the data): Not picked for this test.
+
+## how-it-works.tsx and how/
+
+- Heading: Run it in 3 days.
+- Support line: Follow 4 steps from one line to real messages.
+- Step 1 title: Type what you sell.
+- Step 1 line: Add a photo, a price and where you sell.
+- Step 2 title: Get 8 posts.
+- Step 2 line: Read one post for each kind of buyer.
+- Step 3 title: Put ₱100 behind each post. Line: Promote it on the app you sell on, for 3 days.
+- Step 3 line: Run them on your own Facebook page for 3 days.
+- Step 4 title: See who messaged.
+- Step 4 line: Type in the results and see which buyers sent the most messages.
+- Step 1 mock, the start screen: What do you sell? / typed line "Soy candles poured at home" / Add a photo / Price, with the price from the data ("₱350 per 180 g jar") / Where you sell, with the channels from the data ticked (Shopee, Instagram, Facebook) / button: Write my 8 posts
+- Step 2 mock: Your 8 posts / One for each kind of buyer / under each post, the audience name from the data
+- Step 3 mock: Promoted / Day 1 of 3, then 2, then 3, with "₱800 spent" counting beside it / under each post: ₱100 and a bar in 3 parts, one per day
+- Step 4 mock: Most messages / the winner's audience name / `14` messages / then all 8 audience names, most messages first, one dot per message and the count
 - Steps carry no numbers. Only the open step shows its line. On phones only the open step shows at all.
 
 ## your-people.tsx and proof/ (the result)

@@ -15,7 +15,7 @@ import { homeFonts } from "../fonts"
 import { LetterRoll } from "../letter-roll"
 import { HomePost } from "../ugc-post"
 import { Num } from "./num"
-import { costPeso, isRunnerUpDay, unitWord, type SheetItem } from "./data"
+import { isRunnerUpDay, unitWord, type SheetItem } from "./data"
 import "./sheet.css"
 
 type Props = {
@@ -63,7 +63,6 @@ export function PostSheet({ open, onOpenChange, item, dir, onStep, onCloseAutoFo
   const v = inLanguage(item.version, shownLang)
   const m = item.metrics
   const n = m ? resultsOf(m) : 0
-  const cost = m ? costPeso(m) : null
   const photo = photoUrlOf(item.version)
   const field = fieldOf(item)
   const dx = reduced ? 0 : 44
@@ -166,11 +165,6 @@ export function PostSheet({ open, onOpenChange, item, dir, onStep, onCloseAutoFo
                     <span>
                       <Num value={n > 0 ? n : "No"} /> {unitWord(n)}
                     </span>
-                    {cost ? (
-                      <span>
-                        <Num value={cost} /> {`a ${unitWord(1)}`}
-                      </span>
-                    ) : null}
                   </p>
                 ) : null}
 
