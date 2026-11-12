@@ -105,13 +105,14 @@ Rules for anyone adding to it:
 ## How it works (`how-it-works.tsx`, `how/`)
 
 - On cream. The only color is the stage: one rounded green field (`.hw-stage`) with fine grain. The lime light fills most of it and the edges stay emerald and teal; no dark corners, no small spotlight.
-- The stage holds one sheet window at a time: a working mock of that step's screen. Start screen, the 8 posts with their buyers, the 8 boosted, the ranking. Posts are never covered: money, days and messages are set in type under or beside them.
+- One set of 8 posts lives on the stage and travels between the steps; each step only lays out empty slots (`data-slot`) and its own furniture. Start screen (the posts come out of the added photo), the 8 on the field with their buyers (the winner leads, 3 sizes), the same 8 lined up with their ₱99 and days, then the ranking sheet: the winner moves into its slot and the rest drop into their rows. Posts are never covered: money, days and messages are set in type under or beside them.
+- Steps 1 and 4 are sheet windows; steps 2 and 3 put the posts straight on the field with ink type.
 - Numbers: Bricolage 800 in the layout. Doto only for the winner's `14`, as a readout. One dot is one message; the winner's row is the only one in color.
 - Steps on the left are all full ink. The open one is weight 800 with the gold marker and its line; the others are weight 500. No dimmed text, no numbers.
 - The section is pinned for 4 steps of scroll (about 60% of a screen each). Scroll picks the step; clicking a step scrolls to it.
-- Step change: a wash of lime and gold light with grain rolls up from the stage's bottom left (the drop's tail corner) in 1.15 s; the next window is uncovered behind it. Inside a step, things happen once: the line types, the photo lands, the posts are dealt, the days fill, the dots count in.
-- Phones: the stage and the open step pin together; the 8 posts sit in one row that pans slowly.
-- Reduced motion: windows cross-fade, everything shows finished, the phone row can be swiped.
+- Step change: the posts travel on a slightly springy curve, lead first, 55 ms apart; sheets come up from below and leave upward (reversed when scrolling back); bar titles roll; captions follow once the posts land; one band of warm light passes over the field. Inside a step, things happen once: the line types, the photo lands, the days fill, the dots count in. The lime light and the sun rail move with the scroll.
+- Phones: the stage and the open step pin together; the same moves on a taller stage, and only the lead post is named.
+- Reduced motion: scenes cross-fade, the posts fade instead of travelling, everything shows finished.
 
 ## Banned
 

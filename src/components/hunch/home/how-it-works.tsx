@@ -3,9 +3,10 @@
 import * as React from "react"
 import { motion, useMotionValue, useScroll, useTransform } from "framer-motion"
 
-import { HOW, PostsMock, ResultsMock, StartMock } from "./how/mocks"
-import { ease, easeOut, useFilm, useMoving } from "./scroll/film"
+import { BoostMock, HOW, LEAD, MadeMock, ORDER, ResultsMock, StartMock, posts } from "./how/mocks"
+import { ease, easeOut, useFilm, useMoving, useNarrow } from "./scroll/film"
 import { RiseWords, useLoop } from "./story/shared"
+import { HomePost } from "./ugc-post"
 import "./how/how.css"
 
 const STEPS = [
@@ -24,6 +25,30 @@ const EXIT = 0.7
 const ZOOM = 3.3
 
 type Play = { step: number; prev: number; tick: number }
+// Where a post sits in one step: center and width in stage cqw, tilt in degrees.
+type Pos = { cx: number; cy: number; w: number; r: number }
+// Posts render at this width and scale down to their spot, so they stay sharp.
+const BASE = 30
+
+// Offset from the stage, ignoring transforms, so the spots hold while the stage moves.
+function spotOf(el: HTMLElement, stage: HTMLElement): Pos {
+  let x = 0
+  let y = 0
+  let n: HTMLElement | null = el
+  while (n && n !== stage) {
+    x += n.offsetLeft
+    y += n.offsetTop
+    n = n.offsetParent as HTMLElement | null
+  }
+  const W = stage.offsetWidth / 100
+  const r = parseFloat(getComputedStyle(el).getPropertyValue("--r")) || 0
+  return { cx: (x + el.offsetWidth / 2) / W, cy: (y + el.offsetHeight / 2) / W, w: el.offsetWidth / W, r }
+}
+
+const Actor = React.memo(function Actor({ i, boosted }: { i: number; boosted: boolean }) {
+  const v = posts[i]
+  return v ? <HomePost version={v} boosted={boosted} /> : null
+})
 
 export function HowItWorks() {
   const section = React.useRef<HTMLElement>(null)
@@ -35,6 +60,13 @@ export function HowItWorks() {
   const [s, set] = React.useState<Play>({ step: 0, prev: 0, tick: 0 })
   const film = useFilm()
   const moving = useMoving()
+  const narrow = useNarrow()
+  const [spots, setSpots] = React.useState<(Pos | null)[][] | null>(null)
+  const [ready, setReady] = React.useState(false)
+  // How far through the four steps the page is, 0 to 1.
+  const run = useMotionValue(0)
+  const rail = useTransform(run, (v) => 0.12 + 0.88 * v)
+  const light = useTransform(run, [0, 1], ["-14%", "14%"])
 
   // Arriving, the stage is laid down like a sheet. Leaving, the page goes through the results window into the real results.
   const { scrollYProgress: arrive } = useScroll({ target: section, offset: ["start end", "start start"] })
@@ -73,6 +105,45 @@ export function HowItWorks() {
     return () => window.removeEventListener("resize", read)
   }, [film, toCenter])
 
+  // Each step lays out empty slots; the posts travel between them.
+  React.useEffect(() => {
+    const st = stage.current
+    if (!st) return
+    let raf = 0
+    const read = () => {
+      raf = 0
+      if (!st.offsetWidth) return
+      setSpots(
+        [0, 1, 2, 3].map((k) => {
+          const scene = st.querySelector(`[data-scene="${k}"]`)
+          return posts.map((_, i) => {
+            const el = scene?.querySelector<HTMLElement>(`[data-slot~="${i}"]`)
+            if (!el) return null
+            const p = spotOf(el, st)
+            // The photo is square; the posts start a little smaller inside it.
+            return k === 0 ? { ...p, w: p.w * 0.56 } : p
+          })
+        })
+      )
+    }
+    const soon = () => {
+      if (!raf) raf = window.requestAnimationFrame(read)
+    }
+    read()
+    const ro = new ResizeObserver(soon)
+    ro.observe(st)
+    document.fonts?.ready.then(soon)
+    return () => {
+      ro.disconnect()
+      if (raf) window.cancelAnimationFrame(raf)
+    }
+  }, [narrow])
+  React.useEffect(() => {
+    if (!spots || ready) return
+    const r = window.requestAnimationFrame(() => setReady(true))
+    return () => window.cancelAnimationFrame(r)
+  }, [spots, ready])
+
   // Where the pinned part starts and how far it travels, in page pixels.
   const measure = React.useCallback(() => {
     const sec = section.current
@@ -98,6 +169,7 @@ export function HowItWorks() {
       const m = measure()
       if (!m || m.travel <= 0) return
       const at = (window.scrollY - m.start) / m.travel
+      run.set(Math.min(1, Math.max(0, at)))
       const step = Math.min(LAST, Math.max(0, Math.floor(at * STEPS.length)))
       set((cur) => (cur.step === step ? cur : { step, prev: cur.step, tick: 0 }))
     }
@@ -112,7 +184,7 @@ export function HowItWorks() {
       window.removeEventListener("resize", onScroll)
       if (raf) window.cancelAnimationFrame(raf)
     }
-  }, [measure])
+  }, [measure, run])
 
   // One clock per step, in tenths of a second.
   const ticking = playing && s.tick < CLOCK_END
@@ -131,9 +203,22 @@ export function HowItWorks() {
   const t = (i: number) => (reduced || i !== s.step ? DONE : s.tick * 100)
   const shot = (i: number) => ({
     className: "hw-shot",
+    "data-scene": i,
     "data-on": i === s.step ? "" : undefined,
     "data-out": i === s.prev && i !== s.step ? "" : undefined,
   })
+  const actor = (i: number) => {
+    const p = spots?.[s.step]?.[i]
+    const hide = !p || s.step === 0 || (s.step === LAST && i !== LEAD)
+    return {
+      "data-hide": hide ? "" : undefined,
+      "data-lead": i === LEAD ? "" : undefined,
+      style: {
+        "--k": ORDER.indexOf(i),
+        transform: p ? `translate(${p.cx - BASE / 2}cqw, ${p.cy - (BASE * 8) / 9}cqw) rotate(${p.r}deg) scale(${p.w / BASE})` : undefined,
+      } as React.CSSProperties,
+    }
+  }
 
   return (
     <section ref={section} id="how-it-works" aria-labelledby="how-it-works-title" className="hw">
@@ -147,22 +232,37 @@ export function HowItWorks() {
         </motion.div>
         <span ref={mark} className="hw-mark" />
         <div ref={play} className="hw-play">
-          <motion.div ref={stage} className="hw-stage" data-step={s.step} aria-hidden style={stageStyle}>
+          <motion.div
+            ref={stage}
+            className="hw-stage"
+            data-step={s.step}
+            data-back={s.step < s.prev ? "" : undefined}
+            aria-hidden
+            style={stageStyle}
+          >
+            <motion.i className="hw-light" style={moving ? { x: light } : undefined} />
+            <i key={s.step} className="hw-sheen" />
             <div {...shot(0)}>
               <StartMock t={t(0)} />
             </div>
             <div {...shot(1)}>
-              <PostsMock t={t(1)} />
+              <MadeMock />
             </div>
             <div {...shot(2)}>
-              <PostsMock t={t(2)} boost />
+              <BoostMock t={t(2)} />
             </div>
             <div {...shot(3)}>
               <ResultsMock t={t(3)} />
             </div>
-            <i key={s.step} className="hw-wash" />
+            <div className="hw-cast" data-ready={ready ? "" : undefined}>
+              {posts.map((v, i) => (
+                <span key={v.id} className="hw-actor" {...actor(i)}>
+                  <Actor i={i} boosted={s.step >= 2} />
+                </span>
+              ))}
+            </div>
           </motion.div>
-          <motion.ol className="hw-steps" style={{ ...asideStyle, "--hw-done": (s.step + 1) / STEPS.length } as React.CSSProperties}>
+          <motion.ol className="hw-steps" style={{ ...asideStyle, "--hw-done": rail } as unknown as React.ComponentProps<typeof motion.ol>["style"]}>
             {STEPS.map((step, i) => (
               <li key={step.title} data-on={i === s.step ? "" : undefined}>
                 <button type="button" className="hw-step" aria-current={i === s.step ? "step" : undefined} onClick={() => go(i)}>
