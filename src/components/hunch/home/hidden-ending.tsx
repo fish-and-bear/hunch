@@ -72,10 +72,6 @@ export function HiddenEnding() {
       <PeopleField reduced={reduced} />
       <div className="he-words">
         <h2 className="hh-display he-title">Go find your buyers.</h2>
-        <p className="hh-line he-hint">
-          <span className="he-hint-mouse">Move around and they light up.</span>
-          <span className="he-hint-touch">Tap and they light up.</span>
-        </p>
         <Link href="/start" className="hh-pill hh-pill-light he-top group">
           <LetterRoll text="Try your product" />
         </Link>

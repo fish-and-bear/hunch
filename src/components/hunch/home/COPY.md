@@ -154,8 +154,7 @@ A chat with Hunch. At most 4 questions; each answer is one line of 12 words or f
 ## hidden-ending.tsx
 
 - Heading: Go find your buyers.
-- Hint (mouse): Move around and they light up.
-- Hint (touch): Tap and they light up.
+- No hint line: the dots explain themselves.
 - Button: Try your product (goes to /start)
 
 ## Lines to delete wherever they still appear
